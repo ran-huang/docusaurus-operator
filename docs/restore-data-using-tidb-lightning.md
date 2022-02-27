@@ -1,6 +1,7 @@
 ---
 title: Import Data
 summary: Learn how to quickly import data with TiDB Lightning.
+slug: /import-data
 ---
 
 # Import Data

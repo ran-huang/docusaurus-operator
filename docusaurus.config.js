@@ -60,7 +60,7 @@ const config = {
             label: 'Reference',
           },
           {
-            href: 'https://github.com/ran-huang/docusaurus-operator',
+            href: 'https://github.com/pingcap/docs-tidb-operator',
             label: 'GitHub',
             position: 'right',
           },
@@ -81,6 +81,23 @@ const config = {
                   to: '/architecture',
               }
             ],
+          },
+          {
+              title: 'Learn',
+              items: [
+                  {
+                      label: 'Getting Started',
+                      to: '/get-started',
+                  },
+                  {
+                      label: 'Deploy',
+                      to: '/deploy',
+                  },
+                  {
+                      label: 'Migrate',
+                      to: '/import-data',
+                  }
+              ]
           },
           {
             title: 'Community',

@@ -10,6 +10,14 @@ It is a personal project (for study purposes!) and has nothing to do with PingCA
 
 ![Night](/static/img/screenshot-night.jpeg)
 
+## Build
+
+If you want to build this site from your local computer, just clone this repo and run:
+
+```bash
+npm run start
+```
+
 ## TODO
 
 - [x] Migrate the site to Docusaurus
