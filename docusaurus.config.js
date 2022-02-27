@@ -60,7 +60,7 @@ const config = {
             label: 'Reference',
           },
           {
-            href: 'https://github.com/ran-huang/docs-tidb-operator',
+            href: 'https://github.com/ran-huang/docusaurus-operator',
             label: 'GitHub',
             position: 'right',
           },

@@ -1,41 +1,17 @@
-# Website
+# Docusaurus Operator
 
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+I build the site to test how the docs of [TiDB Operator](https://github.com/pingcap/docs-tidb-operator) looks like with [Docusaurus](https://docusaurus.io/) and GitHub Pages.
 
-### Installation
+It is a personal study project and has nothing to do with PingCAP official docs.
 
-```
-$ yarn
-```
+## Roadmap
 
-### Local Development
-
-```
-$ yarn start
-```
-
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-Using SSH:
-
-```
-$ USE_SSH=true yarn deploy
-```
-
-Not using SSH:
-
-```
-$ GIT_USER=<Your GitHub username> yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+- [x] Migrate the site to Docusaurus
+- [ ] Fix admonition
+- [ ] Fix tabs
+- [ ] Add i18n support
+- [ ] Add versioning
+- [ ] Enable auto incremental build
+- [ ] Add site search
+- [ ] Reuse content
+- [ ] Customize styling
