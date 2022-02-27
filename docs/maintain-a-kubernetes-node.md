@@ -15,9 +15,11 @@ This document introduces how to perform a temporary or long-term maintenance tas
 - [`tkctl`](use-tkctl.md)
 - [`jq`](https://stedolan.github.io/jq/download/)
 
-> **Note:**
->
-> Before you maintain a node, you need to make sure that the remaining resources in the Kubernetes cluster are enough for running the TiDB cluster.
+:::note
+
+Before you maintain a node, you need to make sure that the remaining resources in the Kubernetes cluster are enough for running the TiDB cluster.
+
+:::
 
 ## Maintain a node that can be recovered shortly
 

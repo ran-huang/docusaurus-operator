@@ -13,10 +13,12 @@ The restore method described in this document is implemented based on CustomReso
 
 After backing up TiDB cluster data to PVs using BR, if you need to recover the backup SST (key-value pairs) files from PVs to a TiDB cluster, you can follow steps in this document to restore the data using BR.
 
-> **Note:**
->
-> - BR is only applicable to TiDB v3.1 or later releases.
-> - Data restored by BR cannot be replicated to a downstream cluster, because BR directly imports SST files to TiDB and the downstream cluster currently cannot access the upstream SST files.
+:::note
+
+- BR is only applicable to TiDB v3.1 or later releases.
+- Data restored by BR cannot be replicated to a downstream cluster, because BR directly imports SST files to TiDB and the downstream cluster currently cannot access the upstream SST files.
+
+:::
 
 ## Step 1: Prepare the restore environment
 

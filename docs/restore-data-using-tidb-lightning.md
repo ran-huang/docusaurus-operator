@@ -17,9 +17,11 @@ TiDB Lightning supports three backends: `Importer-backend`, `Local-backend`, and
 
 ## Deploy TiKV Importer
 
-> **Note:**
->
-> If you use the `local` or `tidb` backend for data restore, you can skip deploying tikv-importer and [deploy tidb-lightning](#deploy-tidb-lightning) directly.
+:::note
+
+If you use the `local` or `tidb` backend for data restore, you can skip deploying tikv-importer and [deploy tidb-lightning](#deploy-tidb-lightning) directly.
+
+:::
 
 You can deploy tikv-importer using the Helm chart. See the following example:
 
@@ -40,8 +42,6 @@ You can deploy tikv-importer using the Helm chart. See the following example:
     ```
 
 3. Modify the `values.yaml` file to specify the target TiDB cluster. See the following example:
-
-    {{< copyable "" >}}
 
     ```yaml
     clusterName: demo
@@ -85,9 +85,11 @@ helm inspect values pingcap/tidb-lightning --version=${chart_version} > tidb-lig
 
 Configure a `backend` used by TiDB Lightning depending on your needs. To do that, you can set the `backend` value in `values.yaml` to an option in `importer`, `local`, or `tidb`.
 
-> **Note:**
->
-> If you use the [`local` backend](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends#tidb-lightning-local-backend), you must set `sortedKV` in `values.yaml` to create the corresponding PVC. The PVC is used for local KV sorting.
+:::note
+
+If you use the [`local` backend](https://docs.pingcap.com/tidb/stable/tidb-lightning-backends#tidb-lightning-local-backend), you must set `sortedKV` in `values.yaml` to create the corresponding PVC. The PVC is used for local KV sorting.
+
+:::
 
 Starting from v1.1.10, the tidb-lightning Helm chart saves the [TiDB Lightning checkpoint information](https://docs.pingcap.com/tidb/stable/tidb-lightning-checkpoints) in the directory of the source data. When the a new tidb-lightning job is running, it can resume the data import according to the checkpoint information.
 
@@ -99,14 +101,16 @@ If the target TiDB cluster has enabled TLS for the MySQL client (`spec.tidb.tlsC
 
 To use different client certificates to connect to the TiDB server, refer to [Issue two sets of certificates for the TiDB cluster](enable-tls-for-mysql-client.md#issue-two-sets-of-certificates-for-the-tidb-cluster) to generate the client-side certificate for TiDB Lightning, and configure the corresponding Kubernetes secret object in `tlsCluster.tlsClientSecretName` in `values.yaml`.
 
-> **Note:**
->
-> If TLS is enabled between components via `tlsCluster.enabled: true` but not enabled between TiDB Lightning and the TiDB server via `tlsClient.enabled: true`, you need to explicitly disable TLS between TiDB Lightning and the TiDB server in `config` in `values.yaml`:
->
-> ```toml
-> [tidb]
-> tls="false"
-> ```
+:::note
+
+If TLS is enabled between components via `tlsCluster.enabled: true` but not enabled between TiDB Lightning and the TiDB server via `tlsClient.enabled: true`, you need to explicitly disable TLS between TiDB Lightning and the TiDB server in `config` in `values.yaml`:
+
+```toml
+[tidb]
+tls="false"
+```
+
+:::
 
 TiDB Lightning Helm chart supports both local and remote data sources.
 
@@ -133,8 +137,6 @@ To restore backup data from the remote source, take the following steps:
     * Grant permissions by importing AccessKey and SecretKey
 
         1. Create a `Secret` configuration file `secret.yaml` containing the rclone configuration. A sample configuration is listed below. Only one cloud storage configuration is required.
-
-            {{< copyable "" >}}
 
             ```yaml
             apiVersion: v1
@@ -179,8 +181,6 @@ To restore backup data from the remote source, take the following steps:
        If you use Amazon S3 as the storage, you can grant permissions by associating IAM with Pod or with ServiceAccount, in which `s3.access_key_id` and `s3.secret_access_key` can be ignored.
 
         1. Save the following configurations as `secret.yaml`.
-
-            {{< copyable "" >}}
 
             ```yaml
             apiVersion: v1
@@ -292,9 +292,11 @@ helm uninstall ${release_name} -n ${namespace}
 
 When TiDB Lightning fails to restore data, you cannot simply restart it. **Manual intervention** is required. Therefore, the TiDB Lightning's `Job` restart policy is set to `Never`.
 
-> **Note:**
->
-> If you have not configured to persist the checkpoint information in the target TiDB cluster, other MySQL-compatible databases or a shared storage directory, after the restore failure, you need to first delete the part of data already restored to the target cluster. After that, deploy tidb-lightning again and retry the data restore.
+:::note
+
+If you have not configured to persist the checkpoint information in the target TiDB cluster, other MySQL-compatible databases or a shared storage directory, after the restore failure, you need to first delete the part of data already restored to the target cluster. After that, deploy tidb-lightning again and retry the data restore.
+
+:::
 
 If TiDB Lightning fails to restore data, and if you have configured to persist the checkpoint information in the target TiDB cluster, other MySQL-compatible databases or a shared storage directory, follow the steps below to do manual intervention:
 

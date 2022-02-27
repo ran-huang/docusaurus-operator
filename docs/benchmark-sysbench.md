@@ -94,9 +94,11 @@ For the test (2019.08) where the result in multiple AZs is compared with that in
 
 Sysbench, the pressure test platform, has a high demand on CPU in the high concurrency read test. Therefore, it is recommended that you use machines with high configuration and multiple cores so that the test platform does not become the bottleneck.
 
-> **Note:**
->
-> The usable machine types vary among GCP regions. In the test, the disk also performs differently. Therefore, only the machines in us-central1 are applied for test.
+:::note
+
+The usable machine types vary among GCP regions. In the test, the disk also performs differently. Therefore, only the machines in us-central1 are applied for test.
+
+:::
 
 #### Disk
 
@@ -279,10 +281,12 @@ Latency comparison:
 
 From the images above, TiDB performs better on Ubuntu than on COS in the Point Select test.
 
-> **Note:**
->
-> - This test is conducted only for the single test case and indicates that the performance might be affected by different operating systems, different optimization, and default settings. Therefore, PingCAP makes no recommendation for the operating system.
-> - COS is officially recommended by GKE, because it is optimized for containers and improved substantially on security and disk performance.
+:::note
+
+- This test is conducted only for the single test case and indicates that the performance might be affected by different operating systems, different optimization, and default settings. Therefore, PingCAP makes no recommendation for the operating system.
+- COS is officially recommended by GKE, because it is optimized for containers and improved substantially on security and disk performance.
+
+:::
 
 #### Kubernetes Service vs GCP LoadBalancer
 
@@ -452,8 +456,9 @@ This is a test of TiDB using sysbench running in Kubernetes deployed on a typica
 - Increased latency among nodes in multiple AZs has a certain impact on the TiDB performance (30% ~ 6%; the impact diminishes as the concurrent number increases).
 - The QPS performance is greatly improved (50% ~ 60%) if the Point Select read test is conducted on machines of computing type (compared with general types), because the test mainly consumes CPU resources.
 
-> **Note:**
->
-> - The factors above might change over time. The TiDB performance might vary on different cloud platforms. In the future, more tests will be conducted on more dimensions.
->
-> - The sysbench test case cannot fully represent the actual business scenarios. It is recommended that you simulate the actual business for test and make consideration based on all the costs behind (machines, the difference between operating systems, the limit of Host network, and so on).
+:::note
+
+- The factors above might change over time. The TiDB performance might vary on different cloud platforms. In the future, more tests will be conducted on more dimensions.
+- The sysbench test case cannot fully represent the actual business scenarios. It is recommended that you simulate the actual business for test and make consideration based on all the costs behind (machines, the difference between operating systems, the limit of Host network, and so on).
+
+:::

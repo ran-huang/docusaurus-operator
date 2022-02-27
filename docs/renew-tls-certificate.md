@@ -17,9 +17,11 @@ If the original TLS certificates are issued by [the `cfssl` system](enable-tls-b
 
 ### Renew and replace the CA certificate
 
-> **Note:**
->
-> If you don't need to renew the CA certificate, you can skip the operations in this section and directly refer to [renew and replace certificates between components](#renew-and-replace-certificates-between-components).
+:::note
+
+If you don't need to renew the CA certificate, you can skip the operations in this section and directly refer to [renew and replace certificates between components](#renew-and-replace-certificates-between-components).
+
+:::
 
 1. Back up the original CA certificate and key.
 
@@ -67,9 +69,11 @@ If the original TLS certificates are issued by [the `cfssl` system](enable-tls-b
 
 ### Renew and replace certificates between components
 
-> **Note:**
->
-> Before renewing and replacing certificates between components, make sure that the CA certificate can verify the certificates between components before and after the renewal as valid. If you have [renewed and replaced the CA certificate](#renew-and-replace-the-ca-certificate), make sure that the TiDB cluster is restarted based on the new CA certificate.
+:::note
+
+Before renewing and replacing certificates between components, make sure that the CA certificate can verify the certificates between components before and after the renewal as valid. If you have [renewed and replaced the CA certificate](#renew-and-replace-the-ca-certificate), make sure that the TiDB cluster is restarted based on the new CA certificate.
+
+:::
 
 1. Generate new server-side and client-side certificates based on the original configuration information of each component.
 
@@ -137,9 +141,11 @@ When you use `cert-manager` to issue the certificate, if you specify the `spec.r
 
 Although `cert-manager` can automatically renew the CA certificate and the corresponding Kubernetes Secret objects, it currently does not support merging the old and new CA certificates into a combined CA certificate to accept certificates issued by the new and old CA certificates at the same time. Therefore, during the process of renewing and replacing the CA certificate, the cluster components cannot authenticate each other via TLS.
 
-> **Warning:**
->
-> Because the components cannot accept certificates issued by the new and old CAs at the same time, during the process of renewing and replacing certificates, some components' Pods need to be recreated. This might cause some requests to access the TiDB cluster to fail.
+:::danger Warning
+
+Because the components cannot accept certificates issued by the new and old CAs at the same time, during the process of renewing and replacing certificates, some components' Pods need to be recreated. This might cause some requests to access the TiDB cluster to fail.
+
+:::
 
 The steps to renew and replace the CA certificates of PD, TiKV, TiDB and certificates between components are as follows.
 

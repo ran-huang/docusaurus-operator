@@ -243,9 +243,11 @@ All the instances except ACK mandatory workers are deployed across availability 
     kubectl --kubeconfig credentials/kubeconfig create -f db-monitor.yaml -n ${namespace}
     ```
 
-> **Note:**
->
-> If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+:::note
+
+If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+
+:::
 
 ## Access the database
 
@@ -261,10 +263,12 @@ mysql -h ${tidb_lb_ip} -P 4000 -u root
 
 `tidb_lb_ip` is the LoadBalancer IP of the TiDB service.
 
-> **Note:**
->
-> * [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (TiDB version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
-> * By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+* [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (TiDB version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
+* By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 ## Monitor
 
@@ -275,9 +279,11 @@ The initial login user account and password:
 - User: admin
 - Password: admin
 
-> **Warning:**
->
-> If you already have a VPN connecting to your VPC or plan to set up one, it is strongly recommended that you go to the `spec.grafana.service.annotations` section in the `db-monitor.yaml` file and set `service.beta.kubernetes.io/alicloud-loadbalancer-address-type` to `intranet` for security.
+:::danger Warning
+
+If you already have a VPN connecting to your VPC or plan to set up one, it is strongly recommended that you go to the `spec.grafana.service.annotations` section in the `db-monitor.yaml` file and set `service.beta.kubernetes.io/alicloud-loadbalancer-address-type` to `intranet` for security.
+
+:::
 
 ## Upgrade
 
@@ -295,10 +301,12 @@ To scale out the TiDB cluster, modify `tikv_count`, `tiflash_count`, `cdc_count`
 
 After the nodes scale out, modify the `replicas` of the corresponding components by running `kubectl --kubeconfig credentials/kubeconfig edit tc ${tidb_cluster_name} -n ${namespace}`.
 
-> **Note:**
->
-> - Because it is impossible to determine which node will be taken offline during the scale-in process, the scale-in of TiDB clusters is currently not supported.
-> - The scale-out process takes a few minutes. You can watch the status by running `kubectl --kubeconfig credentials/kubeconfig get po -n ${namespace} --watch`.
+:::note
+
+- Because it is impossible to determine which node will be taken offline during the scale-in process, the scale-in of TiDB clusters is currently not supported.
+- The scale-out process takes a few minutes. You can watch the status by running `kubectl --kubeconfig credentials/kubeconfig get po -n ${namespace} --watch`.
+
+:::
 
 ## Configure
 
@@ -358,9 +366,11 @@ module "tidb-cluster-staging" {
 }
 ```
 
-> **Note:**
->
-> You need to set a unique `cluster_name` for each TiDB cluster.
+:::note
+
+You need to set a unique `cluster_name` for each TiDB cluster.
+
+:::
 
 All the configurable parameters in `tidb-cluster` are as follows:
 
@@ -450,9 +460,11 @@ It is recommended to use a separate Terraform module to manage a specific Kubern
 
 You can customize this script. For example, you can remove the `module "bastion"` declaration if you do not need the bastion machine.
 
-> **Note:**
->
-> You can copy the `deploy/aliyun` directory. But you cannot copy a directory on which the `terraform apply` operation is currently performed. In this case, it is recommended to clone the repository again and then copy it.
+:::note
+
+You can copy the `deploy/aliyun` directory. But you cannot copy a directory on which the `terraform apply` operation is currently performed. In this case, it is recommended to clone the repository again and then copy it.
+
+:::
 
 ## Destroy
 
@@ -476,9 +488,11 @@ terraform state rm module.ack.alicloud_cs_managed_kubernetes.k8s
 
 It may take a long time to finish destroying the cluster.
 
-> **Note:**
->
-> You have to manually delete the cloud disk used by the components in the Alibaba Cloud console.
+:::note
+
+You have to manually delete the cloud disk used by the components in the Alibaba Cloud console.
+
+:::
 
 ## Limitation
 

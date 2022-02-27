@@ -8,13 +8,13 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'TiDB in Kubernetes Docs',
   tagline: 'SQL at Scale',
-  url: 'https://ran-huang.github.io/docs-tidb-operator-docusaurus',
+  url: 'https://ran-huang.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
   organizationName: 'ran-huang', // Usually your GitHub org/user name.
-  projectName: 'docs-tidb-operator-docusaurus', // Usually your repo name.
+  projectName: 'docusaurus-operator', // Usually your repo name.
   deploymentBranch: 'gh-pages',
   trailingSlash: false,
 
@@ -73,9 +73,13 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: 'Tutorial',
-                to: '/docs/intro',
+                label: 'User Manual',
+                to: '/',
               },
+              {
+                  label: 'Reference',
+                  to: '/architecture',
+              }
             ],
           },
           {
@@ -83,15 +87,15 @@ const config = {
             items: [
               {
                 label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                href: 'https://stackoverflow.com/questions/tagged/tidb',
               },
               {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                label: 'tidb.io',
+                href: 'https://tidb.io',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/pingcap',
               },
             ],
           },
@@ -99,17 +103,13 @@ const config = {
             title: 'More',
             items: [
               {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                label: 'Source Code',
+                href: 'https://github.com/pingcap/tidb-operator',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} TiDB in Kubernetes Docs, Inc. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

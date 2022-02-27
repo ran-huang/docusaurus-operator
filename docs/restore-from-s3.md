@@ -61,18 +61,20 @@ Before you use TiDB Lightning to restore the backup data in S3 to the TiDB clust
 
 ## Restore process
 
-> **Note:**
->
-> Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.s3.options` configuration to the YAML file in the examples of this section:
->
-> ```yaml
-> spec:
->   ...
->   s3:
->     ...
->     options:
->     - --ignore-checksum
-> ```
+:::note
+
+Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.s3.options` configuration to the YAML file in the examples of this section:
+
+```yaml
+spec:
+  ...
+  s3:
+    ...
+    options:
+    - --ignore-checksum
+```
+
+:::
 
 This section lists multiple storage access methods. Only follow the method that matches your situation. The methods are as follows:
 
@@ -218,9 +220,11 @@ The example above restores data from the `spec.s3.path` path on S3-compatible st
 
 For more information about the `Restore` CR fields, refer to [Restore CR fields](backup-restore-overview.md#restore-cr-fields).
 
-> **Note:**
->
-> TiDB Operator creates a PVC for data recovery. The backup data is downloaded from the remote storage to the PV first, and then restored. If you want to delete this PVC after the recovery is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the recovery Pod first, and then delete the PVC.
+:::note
+
+TiDB Operator creates a PVC for data recovery. The backup data is downloaded from the remote storage to the PV first, and then restored. If you want to delete this PVC after the recovery is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the recovery Pod first, and then delete the PVC.
+
+:::
 
 ## Troubleshooting
 

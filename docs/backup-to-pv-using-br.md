@@ -18,10 +18,12 @@ If you have the following backup needs, you can use BR to make an [ad-hoc backup
 
 For other backup needs, refer to [Backup and Restore Overview](backup-restore-overview.md) to choose an appropriate backup method.
 
-> **Note:**
->
-> - BR is only applicable to TiDB v3.1 or later releases.
-> - Data that is backed up using BR can only be restored to TiDB instead of other databases.
+:::note
+
+- BR is only applicable to TiDB v3.1 or later releases.
+- Data that is backed up using BR can only be restored to TiDB instead of other databases.
+
+:::
 
 ## Ad-hoc backup
 
@@ -42,8 +44,6 @@ This document provides an example about how to back up the data of the `demo1` T
     ```
 
 3. Make sure that the NFS server is accessible from your Kubernetes cluster, and you have configured TiKV to mount the same NFS server directory to the same local path as in backup jobs. To mount NFS for TiKV, refer to the configuration below:
-
-    {{< copyable "" >}}
 
     ```yaml
     spec:
@@ -79,8 +79,6 @@ This document provides an example about how to back up the data of the `demo1` T
     ```
 
     The content of `backup-nfs.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -154,8 +152,6 @@ The steps to prepare for a scheduled full backup are the same as that of [Prepar
     ```
 
     The content of `backup-schedule-nfs.yaml` is as follows:
-
-    {{< copyable "" >}}
 
    ```yaml
     ---

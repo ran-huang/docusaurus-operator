@@ -98,9 +98,11 @@ Before you use TiDB Lightning to restore the backup data in GCS to the TiDB clus
      kubectl get rt -n test2 -owide
      ```
 
-> **Note:**
->
-> TiDB Operator creates a PVC for data recovery. The backup data is downloaded from the remote storage to the PV first, and then restored. If you want to delete this PVC after the recovery is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the recovery Pod first, and then delete the PVC.
+:::note
+
+TiDB Operator creates a PVC for data recovery. The backup data is downloaded from the remote storage to the PV first, and then restored. If you want to delete this PVC after the recovery is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the recovery Pod first, and then delete the PVC.
+
+:::
 
 ## Troubleshooting
 

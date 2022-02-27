@@ -7,10 +7,12 @@ summary: Learn how to initialize a TiDB cluster in K8s.
 
 This document describes how to initialize a TiDB cluster in Kubernetes (K8s), specifically, how to configure the initial account and password and how to initialize the database by executing SQL statements automatically in batch.
 
-> **Note:**
->
-> - After creating the TiDB cluster, if you manually change the password of the `root` account, the initialization will fail.
-> - The following steps apply only when you have created a cluster for the first time. Further configuration or modification after the initial cluster creation is not valid.
+:::note
+
+- After creating the TiDB cluster, if you manually change the password of the `root` account, the initialization will fail.
+- The following steps apply only when you have created a cluster for the first time. Further configuration or modification after the initial cluster creation is not valid.
+
+:::
 
 ## Configure TidbInitializer
 
@@ -57,8 +59,6 @@ The cluster can also automatically execute the SQL statements in batch in `initS
 
 For example, the following configuration automatically creates a database named `app` after the cluster creation, and grants the `developer` account full management privileges on `app`:
 
-{{< copyable "" >}}
-
 ```yaml
 spec:
 ...
@@ -67,9 +67,11 @@ initSql: |-
     GRANT ALL PRIVILEGES ON app.* TO 'developer'@'%';
 ```
 
-> **Note:**
->
-> Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, but it is not recommended to do so because passwords created this way are saved as plaintext in the `initializer` job object.
+:::note
+
+Currently no verification has been implemented for `initSql`. You can create accounts and set passwords in `initSql`, but it is not recommended to do so because passwords created this way are saved as plaintext in the `initializer` job object.
+
+:::
 
 ## Initialize the cluster
 
@@ -84,8 +86,6 @@ After the initialization, the Pod state becomes `Completed`. If you log in via M
 If the server does not have an external network, you need to download the Docker image used for cluster initialization on a machine with an external network and upload it to the server, and then use `docker load` to install the Docker image on the server.
 
 The following Docker images are used to initialize a TiDB cluster:
-
-{{< copyable "" >}}
 
 ```
 tnir/mysqlclient:latest

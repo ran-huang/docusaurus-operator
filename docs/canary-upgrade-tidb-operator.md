@@ -9,10 +9,12 @@ This document describes how to perform a canary upgrade on TiDB Operator. Using 
 
 When you use TiDB Operator, `tidb-scheduler` is not mandatory. Refer to [tidb-scheduler and default-scheduler](tidb-scheduler.md#tidb-scheduler-and-default-scheduler) to confirm whether you need to deploy `tidb-scheduler`.
 
-> **Note:**
->
-> - You can perform a canary upgrade only on `tidb-controller-manager` and `tidb-scheduler`. AdvancedStatefulSet controller and `tidb-admission-webhook` do not support the canary upgrade.
-> - Canary upgrade is supported since v1.1.10. The version of your current TiDB Operator should be >= v1.1.10.
+:::note
+
+- You can perform a canary upgrade only on `tidb-controller-manager` and `tidb-scheduler`. AdvancedStatefulSet controller and `tidb-admission-webhook` do not support the canary upgrade.
+- Canary upgrade is supported since v1.1.10. The version of your current TiDB Operator should be >= v1.1.10.
+
+:::
 
 ## Related parameters
 

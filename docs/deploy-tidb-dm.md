@@ -11,9 +11,11 @@ summary: Learn how to deploy TiDB DM cluster in Kubernetes.
 
 * Complete [deploying TiDB Operator](deploy-tidb-operator.md).
 
-> **Note:**
->
-> Make sure that the TiDB Operator version >= 1.2.0.
+:::note
+
+Make sure that the TiDB Operator version >= 1.2.0.
+
+:::
 
 ## Configure DM deployment
 
@@ -106,8 +108,6 @@ To use `topologySpreadConstraints`, you must meet the following conditions:
 You can either configure `topologySpreadConstraints` at a cluster level (`spec.topologySpreadConstraints`) for all components or at a component level (such as `spec.tidb.topologySpreadConstraints`) for specific components.
 
 The following is an example configuration:
-
-{{< copyable "" >}}
 
 ```yaml
 topologySpreadConstrains:

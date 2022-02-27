@@ -12,9 +12,11 @@ summary: Learn how to migrate MySQL data to TiDB cluster using DM in Kubernetes.
 * Complete [deploying TiDB Operator](deploy-tidb-operator.md).
 * Complete [deploying DM in Kubernetes](deploy-tidb-dm.md).
 
-> **Note:**
->
-> Make sure that the TiDB Operator version >= 1.2.0.
+:::note
+
+Make sure that the TiDB Operator version >= 1.2.0.
+
+:::
 
 ## Enable DM data migration tasks
 

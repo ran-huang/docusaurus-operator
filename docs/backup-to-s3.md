@@ -68,18 +68,18 @@ GRANT
 
 ### Step 2: Perform ad-hoc backup
 
-> **Note:**
->
-> Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.s3.options` configuration to the YAML file in the examples of this section:
->
-> ```yaml
-> spec:
->   ...
->   s3:
->     ...
->     options:
->     - --ignore-checksum
-> ```
+:::note
+
+Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.s3.options` configuration to the YAML file in the examples of this section:
+
+```yaml
+spec:
+  ...
+  s3:
+    ...
+    options:
+    - --ignore-checksum
+```
 
 This section lists multiple storage access methods. Only follow the method that matches your situation. The methods are as follows:
 
@@ -95,8 +95,6 @@ This section lists multiple storage access methods. Only follow the method that 
     ```
 
     The content of `backup-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -138,8 +136,6 @@ This section lists multiple storage access methods. Only follow the method that 
 
     The content of `backup-s3.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -176,8 +172,6 @@ This section lists multiple storage access methods. Only follow the method that 
     ```
 
     The content of `backup-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -220,8 +214,6 @@ This section lists multiple storage access methods. Only follow the method that 
     ```
 
     The content of `backup-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -292,20 +284,18 @@ The prerequisites for the scheduled backup is the same as the [prepare for ad-ho
 
 ### Step 2: Perform scheduled backup
 
-> **Note:**
->
-> Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.backupTemplate.s3.options` configuration to the YAML file in the examples of this section:
->
-> ```yaml
-> spec:
->   ...
->   backupTemplate:
->     ...
->     s3:
->       ...
->       options:
->       - --ignore-checksum
-> ```
+:::note
+Because of the `rclone` [issue](https://rclone.org/s3/#key-management-system-kms), if the backup data is stored in Amazon S3 and the `AWS-KMS` encryption is enabled, you need to add the following `spec.backupTemplate.s3.options` configuration to the YAML file in the examples of this section:
+```yaml
+spec:
+  ...
+  backupTemplate:
+    ...
+    s3:
+      ...
+      options:
+      - --ignore-checksum
+```
 
 + Method 1: Create the `BackupSchedule` CR to enable the scheduled full backup to Amazon S3 by importing AccessKey and SecretKey to grant permissions:
 
@@ -314,8 +304,6 @@ The prerequisites for the scheduled backup is the same as the [prepare for ad-ho
     ```
 
     The content of `backup-schedule-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -362,8 +350,6 @@ The prerequisites for the scheduled backup is the same as the [prepare for ad-ho
 
     The content of `backup-schedule-s3.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -405,8 +391,6 @@ The prerequisites for the scheduled backup is the same as the [prepare for ad-ho
     ```
 
     The content of `backup-schedule-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -453,8 +437,6 @@ The prerequisites for the scheduled backup is the same as the [prepare for ad-ho
     ```
 
     The content of `backup-schedule-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -509,11 +491,12 @@ From the example above, you can see that the `backupSchedule` configuration cons
 
 `backupTemplate` specifies the configuration related to the cluster and remote storage, which is the same as the `spec` configuration of [the `Backup` CR](backup-restore-overview.md#backup-cr-fields). For the unique configuration of `backupSchedule`, refer to [BackupSchedule CR fields](backup-restore-overview.md#backupschedule-cr-fields).
 
-> **Note:**
->
-> TiDB Operator creates a PVC used for both ad-hoc full backup and scheduled full backup. The backup data is stored in PV first and then uploaded to remote storage. If you want to delete this PVC after the backup is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the backup Pod first, and then delete the PVC.
->
-> If the backup data is successfully uploaded to remote storage, TiDB Operator automatically deletes the local data. If the upload fails, the local data is retained.
+:::note
+
+TiDB Operator creates a PVC used for both ad-hoc full backup and scheduled full backup. The backup data is stored in PV first and then uploaded to remote storage. If you want to delete this PVC after the backup is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the backup Pod first, and then delete the PVC.
+If the backup data is successfully uploaded to remote storage, TiDB Operator automatically deletes the local data. If the upload fails, the local data is retained.
+
+:::
 
 ## Delete the backup CR
 

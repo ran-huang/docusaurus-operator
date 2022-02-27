@@ -63,8 +63,6 @@ To better explain how to perform the backup operation, this document shows an ex
 
     The content of `backup-gcs.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -133,8 +131,6 @@ The preparation for the scheduled backup is the same as the [prepare for ad-hoc 
 
     The content of `backup-schedule-gcs.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -188,11 +184,13 @@ From the example above, you can see that the `backupSchedule` configuration cons
 
 `backupTemplate` specifies the configuration related to the cluster and remote storage, which is the same as the `spec` configuration of [the `Backup` CR](backup-restore-overview.md#backup-cr-fields). For the unique configuration of `backupSchedule`, refer to [BackupSchedule CR fields](backup-restore-overview.md#backupschedule-cr-fields).
 
-> **Note:**
->
-> TiDB Operator creates a PVC used for both ad-hoc full backup and scheduled full backup. The backup data is stored in PV first and then uploaded to remote storage. If you want to delete this PVC after the backup is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the backup Pod first, and then delete the PVC.
->
-> If the backup data is successfully uploaded to remote storage, TiDB Operator automatically deletes the local data. If the upload fails, the local data is retained.
+:::note
+
+TiDB Operator creates a PVC used for both ad-hoc full backup and scheduled full backup. The backup data is stored in PV first and then uploaded to remote storage. If you want to delete this PVC after the backup is completed, you can refer to [Delete Resource](cheat-sheet.md#delete-resources) to delete the backup Pod first, and then delete the PVC.
+
+If the backup data is successfully uploaded to remote storage, TiDB Operator automatically deletes the local data. If the upload fails, the local data is retained.
+
+:::
 
 ## Delete the backup CR
 

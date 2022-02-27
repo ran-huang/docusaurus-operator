@@ -19,9 +19,11 @@ It takes you through the following steps:
 - Destroy the TiDB cluster
 - Shut down the Kubernetes cluster (optional)
 
-> **Warning:**
->
-> This document is for testing purposes only. **Do not** follow it in production environments. For production environments, see the instructions in [Deploy TiDB on GCP GKE](deploy-on-gcp-gke.md).
+:::danger Warning
+
+This document is for testing purposes only. **Do not** follow it in production environments. For production environments, see the instructions in [Deploy TiDB on GCP GKE](deploy-on-gcp-gke.md).
+
+:::
 
 ## Select a project
 
@@ -171,15 +173,19 @@ If you did not specify a password during installation, set one now:
 SET PASSWORD FOR 'root'@'%' = '<change-to-your-password>';
 ```
 
-> **Note:**
->
-> This command contains some special characters which cannot be auto-populated in the google cloud shell tutorial, so you might need to copy and paste it into your console manually.
+:::note
+
+This command contains some special characters which cannot be auto-populated in the google cloud shell tutorial, so you might need to copy and paste it into your console manually.
+
+:::
 
 Congratulations, you are now up and running with a distributed TiDB database compatible with MySQL.
 
-> **Note:**
->
-> By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 ## Scale out the TiDB cluster
 

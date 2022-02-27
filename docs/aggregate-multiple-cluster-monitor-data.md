@@ -90,9 +90,11 @@ spec:
 
 ### Configure archives and storage of Thanos Sidecar
 
-> **Note:**
->
-> To ensure successful configuration, you must first create the S3 bucket. If you choose AWS S3, refer to [AWS documentation - Create AWS S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and [AWS documentation - AWS S3 Endpoint List](https://docs.aws.amazon.com/general/latest/gr/s3.html) for instructions.
+:::note
+
+To ensure successful configuration, you must first create the S3 bucket. If you choose AWS S3, refer to [AWS documentation - Create AWS S3 Bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) and [AWS documentation - AWS S3 Endpoint List](https://docs.aws.amazon.com/general/latest/gr/s3.html) for instructions.
+
+:::
 
 Thanos Sidecar supports replicating monitoring data to S3 remote storage.
 

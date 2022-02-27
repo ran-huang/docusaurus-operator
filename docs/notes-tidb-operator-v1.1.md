@@ -41,18 +41,22 @@ In tidb-cluster chart, the configurations of PD, TiDB, and TiKV are rendered int
 
 Since TiDB Operator v1.1, you can configure TiDB, TiKV, and PD directly in TidbCluster Custom Resource (CR). For configuration details, refer to [Configure a TiDB Cluster using TidbCluster](configure-a-tidb-cluster.md).
 
-> **Note:**
->
-> The way TiDB Operator renders configurations is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to CR, the corresponding components might be rolling updated.
+:::note
+
+The way TiDB Operator renders configurations is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to CR, the corresponding components might be rolling updated.
+
+:::
 
 ### Monitor
 
 To create the TidbMonitor CR and manage the Monitor component, refer to [Monitor a TiDB Cluster](monitor-a-tidb-cluster.md).
 
-> **Note:**
->
-> * The `metadata.name` in the TidbMonitor CR must be consistent with the name of the TidbCluster CR in the cluster.
-> * The way TiDB Operator renders resources is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to TidbMonitor CR, the Monitor component might be rolling updated.
+:::note
+
+* The `metadata.name` in the TidbMonitor CR must be consistent with the name of the TidbCluster CR in the cluster.
+* The way TiDB Operator renders resources is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to TidbMonitor CR, the Monitor component might be rolling updated.
+
+:::
 
 ### Initializer
 
@@ -83,9 +87,11 @@ spec
 
 You can modify `version`, `replicas`, `storageClassName`, `requests.storage`, and other configurations according to the needs of your cluster.
 
-> **Note:**
->
-> The way TiDB Operator renders resources is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to TidbCluster CR, the Pump component might be rolling updated.
+:::note
+
+The way TiDB Operator renders resources is different from that of Helm. If you migrate configurations from `tidb-cluster chart values.yaml` to TidbCluster CR, the Pump component might be rolling updated.
+
+:::
 
 ### Scheduled Backup
 
@@ -94,10 +100,12 @@ After TiDB Operator is upgraded to v1.1, you can configure the scheduled full ba
 - If the TiDB cluster version < v3.1, refer to [Scheduled backup using Dumpling](backup-to-s3.md#scheduled-full-backup-to-s3-compatible-storage)
 - If the TiDB cluster version >= v3.1, refer to [Scheduled backup using BR](backup-to-aws-s3-using-br.md#scheduled-full-backup)
 
-> **Note:**
->
-> - Currently, with BackupSchedule CR, you can back up data only to S3 and GCS using Dumpling, and back up data to S3 using BR. If you perform the scheduled full backup and send data to local Persistent Volume Claim (PVC) before the upgrade, you cannot switch to the CR management after the upgrade.
-> - If you switch to the CR management, to avoid repeated backup, delete the Cronjob of the previous scheduled full backup.
+:::note
+
+- Currently, with BackupSchedule CR, you can back up data only to S3 and GCS using Dumpling, and back up data to S3 using BR. If you perform the scheduled full backup and send data to local Persistent Volume Claim (PVC) before the upgrade, you cannot switch to the CR management after the upgrade.
+- If you switch to the CR management, to avoid repeated backup, delete the Cronjob of the previous scheduled full backup.
+
+:::
 
 ### Drainer
 
@@ -121,9 +129,11 @@ After TiDB Operator is upgraded to v1.1, you can perform backup using the Backup
 - If the TiDB cluster version < v3.1, refer to [Ad-hoc full backup using Dumpling](backup-to-s3.md#ad-hoc-full-backup-to-s3-compatible-storage).
 - If the TiDB cluster version >= v3.1, refer to [Ad-hoc backup using BR](backup-to-aws-s3-using-br.md#ad-hoc-backup).
 
-> **Note:**
->
-> Currently, with Backup CR, you can back up data only to S3 and GCS using Dumpling or BR. If you perform the scheduled full backup and send data to local Persistent Volume Claim (PVC) before the upgrade, you cannot switch to the CR management after the upgrade.
+:::note
+
+Currently, with Backup CR, you can back up data only to S3 and GCS using Dumpling or BR. If you perform the scheduled full backup and send data to local Persistent Volume Claim (PVC) before the upgrade, you cannot switch to the CR management after the upgrade.
+
+:::
 
 ## Restoration
 
@@ -132,6 +142,8 @@ After the TiDB Operator is upgraded to v1.1, you can restore data using the Rest
 - If the TiDB cluster version < v3.1, refer to [Restore Data from S3-Compatible Storage Using TiDB Lightning](restore-from-s3.md).
 - If the TiDB cluster version >= v3.1, refer to [Restore Data from S3-Compatible Storage Using BR](restore-from-aws-s3-using-br.md).
 
-> **Note:**
->
-> Currently, with Restore CR, you can use TiDB Lightning or BR to restore data from S3 and GCS. If you need to restore the backup data from local Persistent Volume Claim (PVC), you cannot switch to the CR management.
+:::note
+
+Currently, with Restore CR, you can use TiDB Lightning or BR to restore data from S3 and GCS. If you need to restore the backup data from local Persistent Volume Claim (PVC), you cannot switch to the CR management.
+
+:::

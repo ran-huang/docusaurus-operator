@@ -44,9 +44,11 @@ Most of the TiDB cluster components use Azure disk as storage. According to [AKS
 
 To create an AKS cluster with [CSI enabled](https://docs.microsoft.com/en-us/azure/aks/csi-storage-drivers), run the following command:
 
-> **Note:**
->
-> If the Kubernetes version of the cluster is earlier than 1.21, you need to append an `--aks-custom-headers` flag to enable the **EnableAzureDiskFileCSIDriver** feature by running the following command:
+:::note
+
+If the Kubernetes version of the cluster is earlier than 1.21, you need to append an `--aks-custom-headers` flag to enable the **EnableAzureDiskFileCSIDriver** feature by running the following command:
+
+:::
 
 ```shell
 # create AKS cluster
@@ -170,11 +172,10 @@ The Azure AKS cluster deploys nodes across multiple zones using "best effort zon
         --enable-ultra-ssd
     ```
 
-> **Warning:**
->
-> About node pool scale-in:
->
-> * You can manually scale in or out an AKS cluster to run a different number of nodes. When you scale in, nodes are carefully [cordoned and drained](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) to minimize disruption to running applications. Refer to [Scale the node count in an Azure Kubernetes Service (AKS) cluster](https://docs.microsoft.com/en-us/azure/aks/scale-cluster).
+:::danger Warning
+
+About node pool scale-in:
+* You can manually scale in or out an AKS cluster to run a different number of nodes. When you scale in, nodes are carefully [cordoned and drained](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/) to minimize disruption to running applications. Refer to [Scale the node count in an Azure Kubernetes Service (AKS) cluster](https://docs.microsoft.com/en-us/azure/aks/scale-cluster).
 
 ## Configure StorageClass
 
@@ -204,9 +205,11 @@ To create a namespace to deploy the TiDB cluster, run the following command:
 kubectl create namespace tidb-cluster
 ```
 
-> **Note:**
->
-> A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use other namespaces, modify the corresponding arguments of `-n` or `--namespace`.
+:::note
+
+A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use other namespaces, modify the corresponding arguments of `-n` or `--namespace`.
+
+:::
 
 ### Deploy
 
@@ -219,9 +222,11 @@ curl -O https://raw.githubusercontent.com/pingcap/tidb-operator/master/examples/
 
 Refer to [configure the TiDB cluster](configure-a-tidb-cluster.md) to further customize and configure the CR before applying.
 
-> **Note:**
->
-> By default, TiDB LoadBalancer in `tidb-cluster.yaml` is set to "internal", indicating that the LoadBalancer is only accessible within the cluster virtual network, not externally. To access TiDB over the MySQL protocol, you need to use a bastion to access the internal host of the cluster or use `kubectl port-forward`. You can delete the "internal" schema in the `tidb-cluster.yaml` file to expose the LoadBalancer publicly by default. However, notice that this practice may expose TiDB to risks.
+:::note
+
+By default, TiDB LoadBalancer in `tidb-cluster.yaml` is set to "internal", indicating that the LoadBalancer is only accessible within the cluster virtual network, not externally. To access TiDB over the MySQL protocol, you need to use a bastion to access the internal host of the cluster or use `kubectl port-forward`. You can delete the "internal" schema in the `tidb-cluster.yaml` file to expose the LoadBalancer publicly by default. However, notice that this practice may expose TiDB to risks.
+
+:::
 
 To deploy the `TidbCluster` and `TidbMonitor` CR in the AKS cluster, run the following command:
 
@@ -266,9 +271,11 @@ After deploying a TiDB cluster, you can access the TiDB database to test or deve
 
 The LoadBalancer created for your TiDB cluster resides in an intranet. You can create a [Bastion](https://docs.microsoft.com/en-us/azure/bastion/tutorial-create-host-portal) in the cluster virtual network to connect to an internal host and then access the database.
 
-> **Note:**
->
-> In addition to the bastion host, you can also connect an existing host to the cluster virtual network by [Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview). If the AKS cluster is created in an existing virtual network, you can use hosts in this virtual network to access the database.
+:::note
+
+In addition to the bastion host, you can also connect an existing host to the cluster virtual network by [Peering](https://docs.microsoft.com/en-us/azure/virtual-network/virtual-network-peering-overview). If the AKS cluster is created in an existing virtual network, you can use hosts in this virtual network to access the database.
+
+:::
 
 - Access via SSH
 
@@ -322,10 +329,12 @@ After access to the internal host via SSH, you can access the TiDB cluster throu
     6 rows in set (0.00 sec)
     ```
 
-> **Note:**
->
-> * [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you access the TiDB service (earlier than v4.0.7) by using MySQL 8.0 client via password authentication, you need to specify the `--default-auth=mysql_native_password` parameter.
-> * By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+* [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you access the TiDB service (earlier than v4.0.7) by using MySQL 8.0 client via password authentication, you need to specify the `--default-auth=mysql_native_password` parameter.
+* By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 ## Access the Grafana monitoring dashboard
 
@@ -347,9 +356,11 @@ In the output above, the `EXTERNAL-IP` column is the LoadBalancer IP address.
 
 You can access the `${grafana-lb}:3000` address using your web browser to view monitoring metrics. Replace `${grafana-lb}` with the LoadBalancer IP address.
 
-> **Note:**
->
-> The default Grafana username and password are both `admin`.
+:::note
+
+The default Grafana username and password are both `admin`.
+
+:::
 
 ## Access TiDB Dashboard
 
@@ -537,10 +548,12 @@ For more information about the storage class configuration and Azure disk types,
 
 Use Azure LRS disks for storage in production environment. To simulate bare-metal performance, use additional [NVMe SSD local store volumes](https://docs.microsoft.com/en-us/azure/virtual-machines/sizes-storage) provided by some Azure instances. You can choose such instances for the TiKV node pool to achieve higher IOPS and lower latency.
 
-> **Note:**
->
-> * You cannot dynamically change the storage class of a running TiDB cluster. In this case, create a new cluster for testing.
-> * Local NVMe Disks are ephemeral. Data will be lost on these disks if you stop/deallocate your node. When the node is reconstructed, you need to migrate data in TiKV. If you do not want to migrate data, it is recommended not to use the local disk in a production environment.
+:::note
+
+* You cannot dynamically change the storage class of a running TiDB cluster. In this case, create a new cluster for testing.
+* Local NVMe Disks are ephemeral. Data will be lost on these disks if you stop/deallocate your node. When the node is reconstructed, you need to migrate data in TiKV. If you do not want to migrate data, it is recommended not to use the local disk in a production environment.
+
+:::
 
 For instance types that provide local disks, refer to [Lsv2-series](https://docs.microsoft.com/en-us/azure/virtual-machines/lsv2-series). The following takes `Standard_L8s_v2` as an example:
 

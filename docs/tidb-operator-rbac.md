@@ -60,11 +60,13 @@ The following table lists the permissions corresponding to the `tidb-controller-
 | storageclasses.storage.k8s.io                 | -                 | -              | [get list watch]                                 | Verify whether StorageClass supports `VolumeExpansion` before expanding PVC storage |
 | -                                             |[/metrics]         | -              | [get]                                            | Read monitoring metrics |
 
-> **Note:**
->
-> * In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
-> * In the **Resource name** column, `-` indicates that the item does not have a resource name.
-> * In the **Actions** column, `*` indicates that the resource supports all actions that can be performed on a Kubernetes cluster.
+:::note
+
+* In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
+* In the **Resource name** column, `-` indicates that the item does not have a resource name.
+* In the **Actions** column, `*` indicates that the resource supports all actions that can be performed on a Kubernetes cluster.
+
+:::
 
 ### `tidb-scheduler` ClusterRole permissions
 
@@ -81,10 +83,12 @@ The following table lists the permissions corresponding to the `tidb-scheduler` 
 | leases.coordination.k8s.io | -                 | [tidb-scheduler] | [get update]                    | Read and update lease resource locks for leader election |
 | tidbclusters.pingcap.com   | -                 | -                | [get]                           | Read Tidbcluster information |
 
-> **Note:**
->
-> * In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
-> * In the **Resource name** column, `-` indicates that the item does not have a resource name.
+:::note
+
+* In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
+* In the **Resource name** column, `-` indicates that the item does not have a resource name.
+
+:::
 
 ## Manage TiDB clusters at the namespace level
 
@@ -136,10 +140,12 @@ The following table lists the permissions corresponding to the `tidb-controller-
 | nodes                         | -                 | -   | [get list watch]                 | Read node Labels and set store Labels for TiKV and TiFlash accordingly|
 | storageclasses.storage.k8s.io | -                 | -   | [get list watch]                 | Verify whether StorageClass supports `VolumeExpansion` before expanding PVC storage |
 
-> **Note:**
->
-> * In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
-> * In the **Resource name** column, `-` indicates that the item does not have a resource name.
+:::note
+
+* In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
+* In the **Resource name** column, `-` indicates that the item does not have a resource name.
+
+:::
 
 ### `tidb-controller-manager` Role permissions
 
@@ -166,11 +172,13 @@ The following table lists the permissions corresponding to the `tidb-controller-
 | jobs.batch                                    | -                 | -              | [get list watch create update delete]            | Use jobs to perform TiDB cluster initialization, backup, and restore operations |
 | pods                                          | -                 | -              | [get list watch update delete]                   | Control the access of the Pod resource |
 
-> **Note:**
->
-> * In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
-> * In the **Resource names** column, `-` indicates that the item does not have a resource name.
-> * In the **Actions** column, `*` indicates that the resource supports all actions that can be performed on a Kubernetes cluster.
+:::note
+
+* In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
+* In the **Resource names** column, `-` indicates that the item does not have a resource name.
+* In the **Actions** column, `*` indicates that the resource supports all actions that can be performed on a Kubernetes cluster.
+
+:::
 
 ### `tidb-scheduler` Role permissions
 
@@ -187,7 +195,9 @@ The following table lists the permissions corresponding to the `tidb-scheduler` 
 | leases.coordination.k8s.io | -                 | [tidb-scheduler] | [get update]                    | Read and update lease resource locks for leader election |
 | tidbclusters.pingcap.com   | -                 | -                | [get]                           | Read Tidbcluster information |
 
-> **Note:**
->
-> * In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
-> * In the **Resource name** column, `-` indicates that the item does not have a resource name.
+:::note
+
+* In the **Non-resource URLs** column, `-` indicates that the item does not have non-resource URLs.
+* In the **Resource name** column, `-` indicates that the item does not have a resource name.
+
+:::

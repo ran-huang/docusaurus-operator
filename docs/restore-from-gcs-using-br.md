@@ -13,10 +13,12 @@ The restore method described in this document is implemented based on CustomReso
 
 After backing up TiDB cluster data to GCS using BR, if you need to recover the backup SST (key-value pairs) files from GCS to TiDB cluster, you can follow steps in this document to restore the data using BR.
 
-> **Note:**
->
-> - BR is only applicable to TiDB v3.1 or later releases.
-> - Data restored by BR cannot be replicated to a downstream cluster, because BR directly imports SST files to TiDB and the downstream cluster currently cannot access the upstream SST files.
+:::note
+
+- BR is only applicable to TiDB v3.1 or later releases.
+- Data restored by BR cannot be replicated to a downstream cluster, because BR directly imports SST files to TiDB and the downstream cluster currently cannot access the upstream SST files.
+
+:::
 
 This document provides an example about how to restore the backup data from the `spec.gcs.prefix` folder of the `spec.gcs.bucket` bucket on GCS to the `demo2` TiDB cluster in the `test2` namespace. The following are the detailed steps.
 

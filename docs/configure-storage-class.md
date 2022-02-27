@@ -17,9 +17,11 @@ TiDB cluster components such as PD, TiKV, TiDB monitoring, TiDB Binlog, and `tid
 
 PVs are created automatically by the system administrator or volume provisioner. PVs and Pods are bound by [PersistentVolumeClaim (PVC)](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#persistentvolumeclaims). Users request for using a PV through a PVC instead of creating a PV directly. The corresponding volume provisioner creates a PV that meets the requirements of PVC and then binds the PV to the PVC.
 
-> **Warning:**
->
-> Do not delete a PV in any case unless you are familiar with the underlying volume provisioner. Deleting a PV manually can cause orphaned volumes and unexpected behavior.
+:::danger Warning
+
+Do not delete a PV in any case unless you are familiar with the underlying volume provisioner. Deleting a PV manually can cause orphaned volumes and unexpected behavior.
+
+:::
 
 ## Recommended storage classes for TiDB clusters
 
@@ -248,8 +250,6 @@ In general, after a PVC is no longer used and deleted, the PV bound to it is rec
 
     The reclaim policy of a `StorageClass` is set at creation time and it cannot be updated once it is created. If it is not set when created, you can create another `StorageClass` of the same provisioner. For example, the default reclaim policy of the `StorageClass` for persistent disks on Google Kubernetes Engine (GKE) is `Delete`. You can create another `StorageClass` named `pd-standard` with its reclaim policy as `Retain`, and change the `storageClassName` of the corresponding component to `pd-standard` when creating a TiDB cluster.
 
-    {{< copyable "" >}}
-
     ```yaml
     apiVersion: storage.k8s.io/v1
     kind: StorageClass
@@ -268,9 +268,11 @@ In general, after a PVC is no longer used and deleted, the PV bound to it is rec
     kubectl patch pv ${pv_name} -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
     ```
 
-> **Note:**
->
-> By default, to ensure data safety, TiDB Operator automatically changes the reclaim policy of the PVs of PD and TiKV to `Retain`.
+:::note
+
+By default, to ensure data safety, TiDB Operator automatically changes the reclaim policy of the PVs of PD and TiKV to `Retain`.
+
+:::
 
 ### Delete PV and data
 

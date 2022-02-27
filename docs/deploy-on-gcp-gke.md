@@ -76,9 +76,11 @@ To create a namespace to deploy the TiDB cluster, run the following command:
 kubectl create namespace tidb-cluster
 ```
 
-> **Note:**
->
-> A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use other namespace, modify the corresponding arguments of `-n` or `--namespace`.
+:::note
+
+A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use other namespace, modify the corresponding arguments of `-n` or `--namespace`.
+
+:::
 
 ### Deploy
 
@@ -100,9 +102,11 @@ kubectl create -f tidb-monitor.yaml -n tidb-cluster
 
 After the yaml file above is applied to the Kubernetes cluster, TiDB Operator creates the desired TiDB cluster and its monitoring component according to the yaml file.
 
-> **Note:**
->
-> If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+:::note
+
+If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+
+:::
 
 ### View the cluster status
 
@@ -144,9 +148,11 @@ gcloud compute instances create bastion \
     --zone=${your-region}-a
 ```
 
-> **Note:**
->
-> `${your-region}-a` is the `a` zone in the region of the cluster, such as `us-central1-a`. You can also create the bastion host in other zones in the same region.
+:::note
+
+`${your-region}-a` is the `a` zone in the region of the cluster, such as `us-central1-a`. You can also create the bastion host in other zones in the same region.
+
+:::
 
 ### Install the MySQL client and connect
 
@@ -198,10 +204,12 @@ After the bastion host is created, you can connect to the bastion host via SSH a
     6 rows in set (0.01 sec)
     ```
 
-> **Note:**
->
-> * [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (TiDB version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
-> * By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+* [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (TiDB version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
+* By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 ### Access the Grafana monitoring dashboard
 
@@ -223,9 +231,11 @@ In the output above, the `EXTERNAL-IP` column is the LoadBalancer IP.
 
 You can access the `${grafana-lb}:3000` address using your web browser to view monitoring metrics. Replace `${grafana-lb}` with the LoadBalancer IP.
 
-> **Note:**
->
-> The default Grafana username and password are both `admin`.
+:::note
+
+The default Grafana username and password are both `admin`.
+
+:::
 
 ## Upgrade
 
@@ -251,9 +261,11 @@ The following example shows how to scale out the `tikv` node pool of the `tidb` 
 gcloud container clusters resize tidb --node-pool tikv --num-nodes 2
 ```
 
-> **Note:**
->
-> In the regional cluster, the nodes are created in 3 zones. Therefore, after scaling out, the number of nodes is `2 * 3 = 6`.
+:::note
+
+In the regional cluster, the nodes are created in 3 zones. Therefore, after scaling out, the number of nodes is `2 * 3 = 6`.
+
+:::
 
 ### Scale out TiDB components
 
@@ -358,11 +370,13 @@ spec:
 
 Use [Zonal Persistent disks](https://cloud.google.com/compute/docs/disks#pdspecs) as a primary production configuration. To simulate bare metal performance, some GCP instance types provide additional [local store volumes](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd). You can choose such instances for the TiKV node pool to achieve higher IOPS and lower latency.
 
-> **Note:**
->
-> You cannot dynamically change the storage class of a running TiDB cluster. You can create a new cluster for testing.
->
-> During the GKE upgrade, [data in the local storage will be lost](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd) due to the node reconstruction. When the node reconstruction occurs, you need to migrate data in TiKV. If you do not want to migrate data, it is recommended not to use the local disk in the production environment.
+:::note
+
+You cannot dynamically change the storage class of a running TiDB cluster. You can create a new cluster for testing.
+
+During the GKE upgrade, [data in the local storage will be lost](https://cloud.google.com/kubernetes-engine/docs/how-to/persistent-volumes/local-ssd) due to the node reconstruction. When the node reconstruction occurs, you need to migrate data in TiKV. If you do not want to migrate data, it is recommended not to use the local disk in the production environment.
+
+:::
 
 1. Create a node pool with local storage for TiKV:
 

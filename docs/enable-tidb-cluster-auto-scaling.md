@@ -7,11 +7,13 @@ summary: Learn how to use the TidbCluster auto-scaling feature.
 
 TiDB has implemented an auto-scaling mechanism since v5.0 based on Kubernetes. You can enable the auto-scaling feature in TiDB Operator. This document introduces how to enable and use the auto-scaling feature for a TiDB cluster in Kubernetes.
 
-> **Warning:**
->
-> * The auto-scaling feature is in the alpha stage. It is highly **not recommended** to enable this feature in the critical production environment.
-> * It is recommended to try this feature in a test environment. PingCAP welcomes your comments and suggestions to help improve this feature.
-> * Currently, the auto-scaling feature is based solely on CPU utilization.
+:::danger Warning
+
+* The auto-scaling feature is in the alpha stage. It is highly **not recommended** to enable this feature in the critical production environment.
+* It is recommended to try this feature in a test environment. PingCAP welcomes your comments and suggestions to help improve this feature.
+* Currently, the auto-scaling feature is based solely on CPU utilization.
+
+:::
 
 ## Enable the auto-scaling feature
 
@@ -135,8 +137,6 @@ For more information about configuration fields, refer to [API references](https
 2. Prepare data using [sysbench](https://github.com/akopytov/sysbench).
 
     Copy the following content and paste it to the local `sysbench.config` file:
-
-    {{< copyable "" >}}
 
     ```config
     mysql-host=${tidb_service_ip}

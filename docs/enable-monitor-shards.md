@@ -39,9 +39,11 @@ spec:
   imagePullPolicy: IfNotPresent
 ```
 
-> **Note:**
->
-> - The number of Pods corresponding to TidbMonitor is the product of `replicas` and `shards`. For example, when `replicas` is `1` and `shards` is `2`, TiDB Operator creates 2 TidbMonitor Pods.
-> - After `shards` is changed, `Targets` are reallocated. However, the monitoring data already stored on the Pods is not reallocated.
+:::note
+
+- The number of Pods corresponding to TidbMonitor is the product of `replicas` and `shards`. For example, when `replicas` is `1` and `shards` is `2`, TiDB Operator creates 2 TidbMonitor Pods.
+- After `shards` is changed, `Targets` are reallocated. However, the monitoring data already stored on the Pods is not reallocated.
+
+:::
 
 For details on the configuration, refer to [shards example](https://github.com/pingcap/tidb-operator/tree/master/examples/monitor-shards).

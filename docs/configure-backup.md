@@ -7,9 +7,11 @@ summary: Learn the configurations of the tidb-backup chart.
 
 `tidb-backup` is a helm chart used for backing up and restoring TiDB clusters in Kubernetes. This document describes the configuration of `tidb-backup`.
 
-> **Note:**
->
-> For TiDB Operator v1.1 and later versions, it is recommended not to use the tidb-backup chart to deploy and manage the TiDB cluster backup. For details, refer to [Notes for TiDB Operator v1.1](notes-tidb-operator-v1.1.md).
+:::note
+
+For TiDB Operator v1.1 and later versions, it is recommended not to use the tidb-backup chart to deploy and manage the TiDB cluster backup. For details, refer to [Notes for TiDB Operator v1.1](notes-tidb-operator-v1.1.md).
+
+:::
 
 ## Configuration
 
@@ -66,9 +68,11 @@ summary: Learn the configurations of the tidb-backup chart.
 - The name of the GCP bucket used to store backup data
 - Default: ""
 
-> **Note:**
->
-> Once you set any variable under the `gcp` section, the backup data will be uploaded to Google Cloud Storage, which means that you must keep the configuration intact.
+:::note
+
+Once you set any variable under the `gcp` section, the backup data will be uploaded to Google Cloud Storage, which means that you must keep the configuration intact.
+
+:::
 
 ### `gcp.secretName`
 
@@ -85,9 +89,11 @@ summary: Learn the configurations of the tidb-backup chart.
 - The endpoint of the `ceph` object storage
 - Default: ""
 
-> **Note:**
->
-> Once you set any variable under the `ceph` section, the backup data will be uploaded to the `ceph` object storage, which means that you must keep the configuration intact.
+:::note
+
+Once you set any variable under the `ceph` section, the backup data will be uploaded to the `ceph` object storage, which means that you must keep the configuration intact.
+
+:::
 
 ### `ceph.bucket`
 

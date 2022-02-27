@@ -32,9 +32,11 @@ In the example, `pdFailoverPeriod`, `tikvFailoverPeriod`, `tiflashFailoverPeriod
 
 In addition, when configuring a TiDB cluster, you can specify `spec.${component}.maxFailoverCount` for each component, which is the threshold of the maximum number of Pods that the TiDB Operator can create during automatic failover. For more information, see the [TiDB component configuration documentation](configure-a-tidb-cluster.md#configure-automatic-failover-thresholds-of-pd-tidb-tikv-and-tiflash).
 
-> **Note:**
->
-> If there are not enough resources in the cluster for TiDB Operator to create new Pods, the newly scaled Pods will be in the pending status.
+:::note
+
+If there are not enough resources in the cluster for TiDB Operator to create new Pods, the newly scaled Pods will be in the pending status.
+
+:::
 
 ## Automatic failover policies
 
@@ -53,10 +55,12 @@ Take a PD cluster with 3 Pods as an example. If a Pod fails for more than 5 minu
 
 When all the failed Pods in the cluster recover, TiDB Operator will automatically remove the newly created Pods, and the number of Pods gets back to the original.
 
-> **Note:**
->
-> - For each PD cluster, the maximum number of Pods that TiDB Operator can create is `spec.pd.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
-> - If most members in a PD cluster fail, which makes the PD cluster unavailable, TiDB Operator will not perform failover for the PD cluster.
+:::note
+
+- For each PD cluster, the maximum number of Pods that TiDB Operator can create is `spec.pd.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+- If most members in a PD cluster fail, which makes the PD cluster unavailable, TiDB Operator will not perform failover for the PD cluster.
+
+:::
 
 ### Failover with TiDB
 
@@ -69,9 +73,11 @@ Take a TiDB cluster with 3 Pods as an example. If a Pod fails for more than 5 mi
 
 When the failed Pod in the cluster recovers, TiDB Operator will automatically remove the newly created Pod, and the number of Pods gets back to 3.
 
-> **Note:**
->
-> For each TiDB cluster, the maximum number of Pods that TiDB Operator can create is `spec.tidb.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+:::note
+
+For each TiDB cluster, the maximum number of Pods that TiDB Operator can create is `spec.tidb.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+
+:::
 
 ### Failover with TiKV
 
@@ -84,9 +90,11 @@ Take a TiKV cluster with 3 Pods as an example. When a TiKV Pod fails, the store 
 
 When the failed Pod in the cluster recovers, TiDB Operator **DOES NOT** remove the newly created Pod, but continues to keep 4 Pods. This is because scaling in TiKV Pods will trigger data migration, which might affect the cluster performance.
 
-> **Note:**
->
-> For each TiKV cluster, the maximum number of Pods that TiDB Operator can create is `spec.tikv.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+:::note
+
+For each TiKV cluster, the maximum number of Pods that TiDB Operator can create is `spec.tikv.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+
+:::
 
 If **all** failed Pods have recovered, and you want to remove the newly created Pods, you can follow the procedure below:
 
@@ -109,9 +117,11 @@ Take a TiFlash cluster with 3 Pods as an example. When a TiFlash Pod fails, the 
 
 When the failed Pod in the cluster recovers, TiDB Operator **DOES NOT** remove the newly created Pod, but continues to keep 4 Pods. This is because scaling in TiFlash Pods will trigger data migration, which might affect the cluster performance.
 
-> **Note:**
->
-> For each TiFlash cluster, the maximum number of Pods that TiDB Operator can create is `spec.tiflash.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+:::note
+
+For each TiFlash cluster, the maximum number of Pods that TiDB Operator can create is `spec.tiflash.maxFailoverCount` (the default value is `3`). After the threshold is reached, TiDB Operator will not perform failover.
+
+:::
 
 If **all** of the failed Pods have recovered, and you want to remove the newly created Pods, you can follow the procedure below:
 

@@ -24,9 +24,11 @@ Before deploying a TiDB cluster on AWS EKS, make sure the following requirements
 
 To verify whether AWS CLI is configured correctly, run the `aws configure list` command. If the output shows the values for `access_key` and `secret_key`, AWS CLI is configured correctly. Otherwise, you need to re-configure AWS CLI.
 
-> **Note:**
->
-> The operations described in this document require at least the [minimum privileges needed by `eksctl`](https://eksctl.io/usage/minimum-iam-policies/) and the [service privileges needed to create a Linux bastion host](https://aws-quickstart.github.io/quickstart-linux-bastion/#_aws_account).
+:::note
+
+The operations described in this document require at least the [minimum privileges needed by `eksctl`](https://eksctl.io/usage/minimum-iam-policies/) and the [service privileges needed to create a Linux bastion host](https://aws-quickstart.github.io/quickstart-linux-bastion/#_aws_account).
+
+:::
 
 ## Recommended instance types and storage
 
@@ -44,8 +46,6 @@ To verify whether AWS CLI is configured correctly, run the `aws configure list` 
 According to AWS [Official Blog](https://aws.amazon.com/blogs/containers/amazon-eks-cluster-multi-zone-auto-scaling-groups/) recommendation and EKS [Best Practice Document](https://aws.github.io/aws-eks-best-practices/reliability/docs/dataplane/#ensure-capacity-in-each-az-when-using-ebs-volumes), since most of the TiDB cluster components use EBS volumes as storage, it is recommended to create a node pool in each availability zone (at least 3 in total) for each component when creating an EKS.
 
 Save the following configuration as the `cluster.yaml` file. Replace `${clusterName}` with your desired cluster name. The cluster and node group names should match the regular expression `[a-zA-Z][-a-zA-Z0-9]*`, so avoid names that contain `_`.
-
-{{< copyable "" >}}
 
 ```yaml
 apiVersion: eksctl.io/v1alpha5
@@ -156,12 +156,14 @@ eksctl create cluster -f cluster.yaml
 
 After executing the command above, you need to wait until the EKS cluster is successfully created and the node group is created and added in the EKS cluster. This process might take 5 to 20 minutes. For more cluster configuration, refer to [`eksctl` documentation](https://eksctl.io/usage/creating-and-managing-clusters/#using-config-files).
 
-> **Warning:**
->
-> If the Regional Auto Scaling Group (ASG) is used:
->
-> * [Enable the instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection-instance) for all the EC2s that have been started. The instance scale-in protection for the ASG is not required.
-> * [Set termination policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#custom-termination-policy) to `NewestInstance` for the ASG.
+:::danger Warning
+
+If the Regional Auto Scaling Group (ASG) is used:
+
+* [Enable the instance scale-in protection](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection-instance) for all the EC2s that have been started. The instance scale-in protection for the ASG is not required.
+* [Set termination policy](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#custom-termination-policy) to `NewestInstance` for the ASG.
+
+:::
 
 ## Configure StorageClass
 
@@ -251,12 +253,13 @@ For more information on the EBS storage types and configuration, refer to [Amazo
 
 Local storage is used for testing bare-metal performance. For higher IOPS and lower latency, you can choose [NVMe SSD volumes](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html) offered by some AWS instances for the TiKV node pool. However, for the production environment, use AWS EBS as your storage type.
 
-> **Note:**
->
-> - You cannot dynamically change StorageClass for a running TiDB cluster. For testing purposes, create a new TiDB cluster with the desired StorageClass.
-> - EKS upgrade or other reasons might cause node reconstruction. In such cases, [data in the local storage might be lost](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-lifetime). To avoid data loss, you need to back up TiKV data before node reconstruction.
-> - To avoid data loss from node reconstruction, you can refer to [AWS documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html) and disable the `ReplaceUnhealthy` feature of the TiKV node group.
+:::note
 
+- You cannot dynamically change StorageClass for a running TiDB cluster. For testing purposes, create a new TiDB cluster with the desired StorageClass.
+- EKS upgrade or other reasons might cause node reconstruction. In such cases, [data in the local storage might be lost](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-lifetime). To avoid data loss, you need to back up TiKV data before node reconstruction.
+- To avoid data loss from node reconstruction, you can refer to [AWS documentation](https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html) and disable the `ReplaceUnhealthy` feature of the TiKV node group.
+
+:::
 For instance types that provide NVMe SSD volumes, check out [Amazon EC2 Instance Types](https://aws.amazon.com/ec2/instance-types/).
 
 The following `c5d.4xlarge` example shows how to configure StorageClass for the local storage:
@@ -325,9 +328,11 @@ To create a namespace to deploy the TiDB cluster, run the following command:
 kubectl create namespace tidb-cluster
 ```
 
-> **Note:**
->
-> A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use another namespace, modify the corresponding arguments of `-n` or `--namespace`.
+:::note
+
+A [`namespace`](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) is a virtual cluster backed by the same physical cluster. This document takes `tidb-cluster` as an example. If you want to use another namespace, modify the corresponding arguments of `-n` or `--namespace`.
+
+:::
 
 ### Deploy
 
@@ -340,9 +345,11 @@ curl -O https://raw.githubusercontent.com/pingcap/tidb-operator/master/examples/
 
 Refer to [configure the TiDB cluster](configure-a-tidb-cluster.md) to further customize and configure the CR before applying.
 
-> **Note:**
->
-> By default, the configuration in `tidb-cluster.yaml` sets up the LoadBalancer for TiDB with the "internal" scheme. This means that the LoadBalancer is only accessible within the VPC, not externally. To access TiDB over the MySQL protocol, you need to use a bastion host or use `kubectl port-forward`. If you want to expose TiDB over the internet and if you are aware of the risks of doing this, you can change the scheme for the LoadBalancer from "internal" to "internet-facing" in the `tidb-cluster.yaml` file.
+:::note
+
+By default, the configuration in `tidb-cluster.yaml` sets up the LoadBalancer for TiDB with the "internal" scheme. This means that the LoadBalancer is only accessible within the VPC, not externally. To access TiDB over the MySQL protocol, you need to use a bastion host or use `kubectl port-forward`. If you want to expose TiDB over the internet and if you are aware of the risks of doing this, you can change the scheme for the LoadBalancer from "internal" to "internet-facing" in the `tidb-cluster.yaml` file.
+
+:::
 
 To deploy the `TidbCluster` and `TidbMonitor` CR in the EKS cluster, run the following command:
 
@@ -353,9 +360,11 @@ kubectl apply -f tidb-monitor.yaml -n tidb-cluster
 
 After the YAML file above is applied to the Kubernetes cluster, TiDB Operator creates the desired TiDB cluster and its monitoring component according to the YAML file.
 
-> **Note:**
->
-> If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+:::note
+
+If you need to deploy a TiDB cluster on ARM64 machines, refer to [Deploy a TiDB Cluster on ARM64 Machines](deploy-cluster-on-arm64.md).
+
+:::
 
 ### View the cluster status
 
@@ -397,9 +406,11 @@ eksctl get cluster -n ${clusterName}
 
 Allow the bastion host to access the Internet. Select the correct key pair so that you can log in to the host via SSH.
 
-> **Note:**
->
-> In addition to the bastion host, you can also connect an existing host to the cluster VPC by [VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html). If the EKS cluster is created in an existing VPC, you can use the host in the VPC.
+:::note
+
+In addition to the bastion host, you can also connect an existing host to the cluster VPC by [VPC Peering](https://docs.aws.amazon.com/vpc/latest/peering/what-is-vpc-peering.html). If the EKS cluster is created in an existing VPC, you can use the host in the VPC.
+
+:::
 
 ### Install the MySQL client and connect
 
@@ -451,10 +462,12 @@ After the bastion host is created, you can connect to the bastion host via SSH a
     6 rows in set (0.00 sec)
     ```
 
-> **Note:**
->
-> * [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (cluster version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
-> * By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+* [The default authentication plugin of MySQL 8.0](https://dev.mysql.com/doc/refman/8.0/en/server-system-variables.html#sysvar_default_authentication_plugin) is updated from `mysql_native_password` to `caching_sha2_password`. Therefore, if you use MySQL client from MySQL 8.0 to access the TiDB service (cluster version < v4.0.7), and if the user account has a password, you need to explicitly specify the `--default-auth=mysql_native_password` parameter.
+* By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 ## Access the Grafana monitoring dashboard
 
@@ -476,9 +489,11 @@ In the output above, the `EXTERNAL-IP` column is the LoadBalancer domain name.
 
 You can access the `${grafana-lb}:3000` address using your web browser to view monitoring metrics. Replace `${grafana-lb}` with the LoadBalancer domain name.
 
-> **Note:**
->
-> The default Grafana username and password are both `admin`.
+:::note
+
+The default Grafana username and password are both `admin`.
+
+:::
 
 ## Access the TiDB Dashboard
 

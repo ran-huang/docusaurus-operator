@@ -7,9 +7,9 @@ summary:  Learn how to deploy TiFlash, the TiDB HTAP storage engine, on Kubernet
 
 This document describes how to add or remove the TiDB HTAP storage engine TiFlash for an existing TiDB cluster in Kubernetes. As a columnar storage extension of TiKV, TiFlash provides both good isolation level and strong consistency guarantee.
 
-> **Note**:
->
-> If a TiDB cluster has not been deployed yet, instead of referring to this document, you can [configure a TiDB cluster in Kubernetes](configure-a-tidb-cluster.md) with the TiFlash-related parameters, and then [deploy the TiDB cluster](deploy-on-general-kubernetes.md).
+:::note
+
+If a TiDB cluster has not been deployed yet, instead of referring to this document, you can [configure a TiDB cluster in Kubernetes](configure-a-tidb-cluster.md) with the TiFlash-related parameters, and then [deploy the TiDB cluster](deploy-on-general-kubernetes.md).
 
 ## User scenarios
 
@@ -23,9 +23,11 @@ This document is applicable to scenarios in which you already have a TiDB cluste
 
 If you need to deploy TiFlash for an existing TiDB cluster, do the following:
 
-> **Note:**
->
-> If your server does not have an external network, you can download the required Docker image on the machine with an external network, upload the Docker image to your server, and then use `docker load` to install the Docker image on the server. For details, see [deploy the TiDB cluster](deploy-on-general-kubernetes.md#deploy-the-tidb-cluster).
+:::note
+
+If your server does not have an external network, you can download the required Docker image on the machine with an external network, upload the Docker image to your server, and then use `docker load` to install the Docker image on the server. For details, see [deploy the TiDB cluster](deploy-on-general-kubernetes.md#deploy-the-tidb-cluster).
+
+:::
 
 1. Edit the `TidbCluster` Custom Resource (CR):
 
@@ -103,9 +105,11 @@ If you need to deploy TiFlash for an existing TiDB cluster, do the following:
 
 Once the deployment of TiFlash is completed, to add PVs for TiFlash, you need to update the `storageClaims` to add disks, and then manually delete the TiFlash StatefulSet. The following are the detailed steps.
 
-> **Warnings**:
->
-> Deleting the TiFlash StatefulSet makes the TiFlash cluster unavailable during the deletion and affects related business. You must be cautious about whether to do the following.
+:::danger Warning
+
+Deleting the TiFlash StatefulSet makes the TiFlash cluster unavailable during the deletion and affects related business. You must be cautious about whether to do the following.
+
+:::
 
 1. Edit the TidbCluster Custom Resource (CR).
 

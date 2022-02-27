@@ -15,9 +15,11 @@ For configuration details on the monitoring system, refer to [TiDB Cluster Monit
 
 In TiDB Operator v1.1 or later versions, you can monitor a TiDB cluster on a Kubernetes cluster by using a simple Custom Resource (CR) file called `TidbMonitor`.
 
-> **Note:**
->
-> * `spec.clusters[].name` should be set to the `TidbCluster` name of the corresponding TiDB cluster.
+:::note
+
+* `spec.clusters[].name` should be set to the `TidbCluster` name of the corresponding TiDB cluster.
+
+:::
 
 ### Persist monitoring data
 
@@ -83,18 +85,20 @@ To add extra options to the command that starts Prometheus, configure `spec.prom
 
 For the complete configuration, refer to the [tidb-operator example](https://github.com/pingcap/tidb-operator/blob/master/examples/monitor-with-externalConfigMap/prometheus/README.md).
 
-> **Note:**
->
-> The following options are automatically configured by the TidbMonitor controller and cannot be specified again via `commandOptions`.
->
-> - `config.file`
-> - `log.level`
-> - `web.enable-admin-api`
-> - `web.enable-lifecycle`
-> - `storage.tsdb.path`
-> - `storage.tsdb.retention`
-> - `storage.tsdb.max-block-duration`
-> - `storage.tsdb.min-block-duration`
+:::note
+
+The following options are automatically configured by the TidbMonitor controller and cannot be specified again via `commandOptions`.
+
+- `config.file`
+- `log.level`
+- `web.enable-admin-api`
+- `web.enable-lifecycle`
+- `storage.tsdb.path`
+- `storage.tsdb.retention`
+- `storage.tsdb.max-block-duration`
+- `storage.tsdb.min-block-duration`
+
+:::
 
 ### Access the Grafana monitoring dashboard
 

@@ -7,9 +7,11 @@ summary: Learn the configurations of the tidb-cluster chart.
 
 This document describes the configuration of the tidb-cluster chart.
 
-> **Note:**
->
-> For TiDB Operator v1.1 and later versions, it is recommended not to use the tidb-cluster chart to deploy and manage the TiDB cluster. For details, refer to [TiDB Operator v1.1 Notes](notes-tidb-operator-v1.1.md).
+:::note
+
+For TiDB Operator v1.1 and later versions, it is recommended not to use the tidb-cluster chart to deploy and manage the TiDB cluster. For details, refer to [TiDB Operator v1.1 Notes](notes-tidb-operator-v1.1.md).
+
+:::
 
 ## Parameters
 

@@ -31,6 +31,7 @@ For TiDB 3.0 or later versions, TiDB separates slow query logs from application 
 kubectl logs -n ${namespace} ${pod_name} -c slowlog
 ```
 
-> **Note:**
->
-> The format of TiDB slow query logs is the same as that of MySQL slow query logs. However, due to the characteristics of TiDB itself, some of the specific fields might be different. For this reason, the tool for parsing MySQL slow query logs may not be fully compatible with TiDB slow query logs.
+:::note
+
+The format of TiDB slow query logs is the same as that of MySQL slow query logs. However, due to the characteristics of TiDB itself, some of the specific fields might be different. For this reason, the tool for parsing MySQL slow query logs may not be fully compatible with TiDB slow query logs.
+:::

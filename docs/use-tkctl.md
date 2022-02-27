@@ -7,9 +7,11 @@ summary: Learn how to use the tkctl (TiDB Kubernetes Control) tool.
 
 TiDB Kubernetes Control (`tkctl`) is a command line utility that is used for TiDB Operator to maintain and diagnose the TiDB cluster in Kubernetes.
 
-> **Note:**
->
-> PingCAP is no longer maintaining `tkctl` from v1.1.x, some of the following functions may not be usable, please use the equivalent `kubectl` commands directly.
+:::note
+
+PingCAP is no longer maintaining `tkctl` from v1.1.x, some of the following functions may not be usable, please use the equivalent `kubectl` commands directly.
+
+:::
 
 ## Installation
 
@@ -207,9 +209,11 @@ This command is used to diagnose the Pods in a TiDB cluster. It launches a debug
 | --docker-socket |    | Specify the docker socket on the target node; default to `/var/run/docker.sock` |
 | --privileged |    | Whether to enable the [privileged](https://docs.docker.com/engine/reference/run/#runtime-privilege-and-linux-capabilities) mode for the debug container |
 
-> **Note:**
->
-> The default image of the debug container contains various troubleshooting tools, so the image size is relatively large. If you only need `pd-ctl` and `tidb-ctl`, you can specify using the `tidb-control` image by using the `--image=pingcap/tidb-control:latest` command line option.
+:::note
+
+The default image of the debug container contains various troubleshooting tools, so the image size is relatively large. If you only need `pd-ctl` and `tidb-ctl`, you can specify using the `tidb-control` image by using the `--image=pingcap/tidb-control:latest` command line option.
+
+:::
 
 For example:
 

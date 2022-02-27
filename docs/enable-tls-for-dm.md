@@ -477,9 +477,11 @@ This section describes how to issue certificates using two methods: `cfssl` and 
 
 When you deploy a DM cluster, you can enable TLS between DM components, and set the `cert-allowed-cn` configuration item to verify the CN (Common Name) of each component's certificate.
 
-> **Note:**
->
-> Currently, you can set only one value for the `cert-allowed-cn` configuration item of DM-master. Therefore, the `commonName` of all `Certificate` objects must be the same.
+:::note
+
+Currently, you can set only one value for the `cert-allowed-cn` configuration item of DM-master. Therefore, the `commonName` of all `Certificate` objects must be the same.
+
+:::
 
 - Create the `dm-cluster.yaml` file:
 

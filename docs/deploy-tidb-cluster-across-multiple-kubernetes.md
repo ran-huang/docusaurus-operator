@@ -3,9 +3,11 @@ title: Deploy a TiDB Cluster across Multiple Kubernetes Clusters
 summary: Learn how to deploy a TiDB cluster across multiple Kubernetes clusters.
 ---
 
-> **Warning:**
->
-> This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+:::danger Warning
+
+This is still an experimental feature. It is **NOT** recommended that you use it in the production environment.
+
+:::
 
 # Deploy a TiDB Cluster across Multiple Kubernetes Clusters
 
@@ -604,9 +606,11 @@ Through the above steps, you can complete exit and resources reclaim of the join
 
 ## Enable the feature for a cluster with existing data and make it the initial TiDB cluster
 
-> **Warning:**
->
-> Currently, this is an experimental feature and might cause data loss. Please use it carefully.
+:::danger Warning
+
+Currently, this is an experimental feature and might cause data loss. Please use it carefully.
+
+:::
 
 1. Update `.spec.clusterDomain` configuration:
 

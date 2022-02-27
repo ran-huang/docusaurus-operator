@@ -31,8 +31,6 @@ The [advanced StatefulSet controller](https://github.com/pingcap/advanced-statef
 
 2. Enable the `AdvancedStatefulSet` feature in `values.yaml` of the TiDB Operator chart:
 
-    {{< copyable "" >}}
-
     ```yaml
     features:
     - AdvancedStatefulSet=true
@@ -42,9 +40,11 @@ The [advanced StatefulSet controller](https://github.com/pingcap/advanced-statef
 
     Upgrade TiDB Operator. For details, refer to [Upgrade TiDB Operator](upgrade-tidb-operator.md).
 
-> **Note:**
->
-> If the `AdvancedStatefulSet` feature is enabled, TiDB Operator converts the current `StatefulSet` object into an `AdvancedStatefulSet` object. However, after the `AdvancedStatefulSet` feature is disabled, the `AdvancedStatefulSet` object cannot be automatically converted to the built-in `StatefulSet` object of Kubernetes.
+:::note
+
+If the `AdvancedStatefulSet` feature is enabled, TiDB Operator converts the current `StatefulSet` object into an `AdvancedStatefulSet` object. However, after the `AdvancedStatefulSet` feature is disabled, the `AdvancedStatefulSet` object cannot be automatically converted to the built-in `StatefulSet` object of Kubernetes.
+
+:::
 
 ## Usage
 
@@ -63,8 +63,6 @@ kubectl get -n ${namespace} asts
 With the advanced StatefulSet controller, when scaling in TidbCluster, you can not only reduce the number of replicas, but also specify the scaling in of any Pod in the PD, TiDB, or TiKV components by configuring annotations.
 
 For example:
-
-{{< copyable "" >}}
 
 ```yaml
 apiVersion: pingcap.com/v1alpha1
@@ -100,21 +98,19 @@ spec:
 
 The above configuration deploys 4 TiKV instances, namely `basic-tikv-0`, `basic-tikv-1`, ..., `basic-tikv-3`. If you want to delete `basic-tikv-1`, set `spec.tikv.replicas` to `3` and configure the following annotations:
 
-{{< copyable "" >}}
-
 ```yaml
 metadata:
   annotations:
     tikv.tidb.pingcap.com/delete-slots: '[1]'
 ```
 
-> **Note:**
->
-> When modifying `replicas` and `delete-slots annotation`, complete the modification in the same operation; otherwise, the controller operates the modification according to the general expectations.
+:::note
+
+When modifying `replicas` and `delete-slots annotation`, complete the modification in the same operation; otherwise, the controller operates the modification according to the general expectations.
+
+:::
 
 The complete example is as follows:
-
-{{< copyable "" >}}
 
 ```yaml
 apiVersion: pingcap.com/v1alpha1
@@ -162,13 +158,13 @@ The value of Annotation is an integer array of JSON, such as `[0]`, `[0,1]`, `[1
 
 You can reverse the above operation of scaling in to restore `basic-tikv-1`.
 
-> **Note:**
->
-> The specified scaling out performed by the advanced StatefulSet controller is the same as the regular StatefulSet scaling, which does not delete the Persistent Volume Claims (PVCs) associated with the Pod. If you want to avoid using the previous data, delete the associated PVCs before scaling out at the original location.
+:::note
+
+The specified scaling out performed by the advanced StatefulSet controller is the same as the regular StatefulSet scaling, which does not delete the Persistent Volume Claims (PVCs) associated with the Pod. If you want to avoid using the previous data, delete the associated PVCs before scaling out at the original location.
+
+:::
 
 For example:
-
-{{< copyable "" >}}
 
 ```yaml
 apiVersion: pingcap.com/v1alpha1

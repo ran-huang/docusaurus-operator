@@ -20,17 +20,17 @@ Therefore, if the Kubernetes cluster meets one of the following conditions, you 
 - The Kubernetes version is v1.18.x and [the `EvenPodsSpread` feature gate](https://kubernetes.io/docs/reference/command-line-tools-reference/feature-gates/) is enabled.
 - The Kubernetes version >= v1.19.
 
-> **Note:**
->
-> When you change an existing TiDB clusters from using `tidb-scheduler` to using `default-scheduler`, it triggers the rolling update of the TiDB clusters.
+:::note
+
+When you change an existing TiDB clusters from using `tidb-scheduler` to using `default-scheduler`, it triggers the rolling update of the TiDB clusters.
+
+:::
 
 ## TiDB cluster scheduling requirements
 
 A TiDB cluster includes three key components: PD, TiKV, and TiDB. Each consists of multiple nodes: PD is a Raft cluster, and TiKV is a multi-Raft group cluster. PD and TiKV components are stateful. If the `EvenPodsSpread` feature gate is not enabled in the Kubernetes cluster, the default scheduling rules of the Kubernetes scheduler cannot meet the high availability scheduling requirements of the TiDB cluster, so the Kubernetes scheduling rules need to be extended.
 
 Currently, pods can be scheduled according to specific dimensions by modifying `metadata.annotations` in TidbCluster, such as:
-
-{{< copyable "" >}}
 
 ```yaml
 metadata:

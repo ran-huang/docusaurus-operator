@@ -70,8 +70,6 @@ In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To 
 
 - If `--allowed-unsafe-sysctls=net.*` can be configured for [kubelet](https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/) in the Kubernetes cluster, configure this parameter for kubelet and configure TiDB in the following way:
 
-    {{< copyable "" >}}
-
     ```yaml
     tidb:
       ...
@@ -82,8 +80,6 @@ In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To 
     ```
 
 - If `--allowed-unsafe-sysctls=net.*` cannot be configured for kubelet, configure TiDB in the following way:
-
-    {{< copyable "" >}}
 
     ```yaml
     tidb:
@@ -96,6 +92,8 @@ In Linux, the keepalive probe packet is sent every 7,200 seconds by default. To 
       ...
     ```
 
-> **Note:**
->
-> The configuration above requires TiDB Operator 1.1 or later versions.
+:::note
+
+The configuration above requires TiDB Operator 1.1 or later versions.
+
+:::

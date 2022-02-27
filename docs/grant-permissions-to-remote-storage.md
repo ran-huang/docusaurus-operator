@@ -25,10 +25,12 @@ kubectl create secret generic s3-secret --from-literal=access_key=xxx --from-lit
 
 If you associate the user's [IAM](https://aws.amazon.com/cn/iam/) role with the resources of the running Pods, the processes running in the Pods can have the permissions of the role. This method is provided by [`kube2iam`](https://github.com/jtblin/kube2iam).
 
-> **Note:**
->
-> - When you use this method to grant permissions, you can [create the `kube2iam` environment](https://github.com/jtblin/kube2iam#usage) in the Kubernetes cluster and deploy TiDB Operator and the TiDB cluster.
-> - This method is not applicable to the [`hostNetwork`](https://kubernetes.io/docs/concepts/policy/pod-security-policy) mode. Make sure the value of `spec.tikv.hostNetwork` is set to `false`.
+:::note
+
+- When you use this method to grant permissions, you can [create the `kube2iam` environment](https://github.com/jtblin/kube2iam#usage) in the Kubernetes cluster and deploy TiDB Operator and the TiDB cluster.
+- This method is not applicable to the [`hostNetwork`](https://kubernetes.io/docs/concepts/policy/pod-security-policy) mode. Make sure the value of `spec.tikv.hostNetwork` is set to `false`.
+
+:::
 
 1. Create an IAM role.
 
@@ -48,9 +50,11 @@ If you associate the user's [IAM](https://aws.amazon.com/cn/iam/) role with the 
 
     After the TiKV Pod is restarted, check whether the Pod has the annotation.
 
-> **Note:**
->
-> `arn:aws:iam::123456789012:role/user` is the IAM role created in Step 1.
+:::note
+
+`arn:aws:iam::123456789012:role/user` is the IAM role created in Step 1.
+
+:::
 
 ### Grant permissions by associating IAM with ServiceAccount
 
@@ -80,9 +84,11 @@ When you use this method to grant permissions, you can [create the EKS cluster](
 
     Modify the value of `spec.tikv.serviceAccount` to `tidb-backup-manager`. After the TiKV Pod is restarted, check whether the Pod's `serviceAccountName` is changed.
 
-> **Note:**
->
-> `arn:aws:iam::123456789012:role/user` is the IAM role created in Step 2.
+:::note
+
+`arn:aws:iam::123456789012:role/user` is the IAM role created in Step 2.
+
+:::
 
 ## GCS account permissions
 

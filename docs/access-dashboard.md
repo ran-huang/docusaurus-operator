@@ -13,15 +13,19 @@ This document describes how to access TiDB Dashboard in Kubernetes.
 - In a production environment, it is recommended to [access TiDB Dashboard by Ingress](#method-2-access-tidb-dashboard-by-ingress). You can also enable the TLS transfer. See [Use Ingress with TLS](#use-ingress-with-tls) for details.
 - To access TiDB Dashboard without a domain name, you can [use NodePort Service](#method-3-use-nodeport-service).
 
-> **Note:**
->
-> Due to the special environment of Kubernetes, some features of TiDB Dashboard are not supported in TiDB Operator. See [Unsupported TiDB Dashboard features](#unsupported-tidb-dashboard-features) for details.
+:::note
+
+Due to the special environment of Kubernetes, some features of TiDB Dashboard are not supported in TiDB Operator. See [Unsupported TiDB Dashboard features](#unsupported-tidb-dashboard-features) for details.
+
+:::
 
 In this document, you can use the Discovery service to access TiDB Dashboard. TiDB Operator starts a Discovery service for each TiDB cluster. The Discovery service can return the corresponding startup parameters for each PD Pod to support the startup of the PD cluster. The Discovery service can also send proxy requests to the TiDB Dashboard.
 
-> **Warning:**
->
-> The TiDB Dashboard is available in the `/dashboard` path of the PD. Other paths outside of this may not have access control.
+:::danger Warning
+
+The TiDB Dashboard is available in the `/dashboard` path of the PD. Other paths outside of this may not have access control.
+
+:::
 
 ## Prerequisites
 
@@ -41,9 +45,11 @@ spec:
 
 ## Method 1. Access TiDB Dashboard by port forward
 
-> **Warning:**
->
-> This guide shows how to quickly access TiDB Dashboard. Do **NOT** use this method in the production environment. For production environments, refer to [Access TiDB Dashboard by Ingress](#method-2-access-tidb-dashboard-by-ingress).
+:::danger Warning
+
+This guide shows how to quickly access TiDB Dashboard. Do **NOT** use this method in the production environment. For production environments, refer to [Access TiDB Dashboard by Ingress](#method-2-access-tidb-dashboard-by-ingress).
+
+:::
 
 TiDB Dashboard is built in the PD component in TiDB 4.0 and later versions. You can refer to the following example to quickly deploy a TiDB cluster in Kubernetes.
 

@@ -23,8 +23,6 @@ This document describes how to migrate a TiDB cluster deployed in the physical o
 
 2. Modify the `/etc/resolv.conf` configuration of the source cluster node, and add the following content to the configuration file:
 
-    {{< copyable "" >}}
-
     ```
     search default.svc.cluster.local svc.cluster.local cluster.local
     nameserver <CoreDNS Pod_IP_1>
@@ -83,9 +81,11 @@ Remove all TiDB nodes of the source cluster:
 
 - If the source cluster is deployed using TiDB Ansible, refer to [Decrease the capacity of a TiDB node](https://docs.pingcap.com/tidb/stable/scale-tidb-using-ansible#decrease-the-capacity-of-a-tidb-node).
 
-> **Note:**
->
-> If you access the source TiDB cluster via load balancer or database middleware, you need to first modify the configuration to route your application traffic to the target TiDB cluster. Otherwise, your application might be affected.
+:::note
+
+If you access the source TiDB cluster via load balancer or database middleware, you need to first modify the configuration to route your application traffic to the target TiDB cluster. Otherwise, your application might be affected.
+
+:::
 
 ## Step 4: Scale in the TiKV nodes of the source cluster
 
@@ -95,10 +95,12 @@ Remove all TiKV nodes of the source cluster:
 
 - If the source cluster is deployed using TiDB Ansible, refer to [Decrease the capacity of a TiKV node](https://docs.pingcap.com/tidb/stable/scale-tidb-using-ansible#decrease-the-capacity-of-a-tikv-node).
 
-> **Note:**
->
-> * You need to scale in the TiKV nodes one by one. Wait until the store state of one TiKV node becomes "tombstone" and then scale in the next TiKV node.
-> * You can view the store state using PD Control.
+:::note
+
+* You need to scale in the TiKV nodes one by one. Wait until the store state of one TiKV node becomes "tombstone" and then scale in the next TiKV node.
+* You can view the store state using PD Control.
+
+:::
 
 ## Step 5: Scale in the PD nodes of the source cluster
 

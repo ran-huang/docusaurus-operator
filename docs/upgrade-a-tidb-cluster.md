@@ -17,16 +17,20 @@ When you perform a rolling update, TiDB Operator serially deletes an old Pod and
 
 During the rolling update, TiDB Operator automatically completes Leader transfer for PD and TiKV. Under the highly available deployment topology (minimum requirements: PD \* 3, TiKV \* 3, TiDB \* 2), performing a rolling update to PD and TiKV servers does not impact the running application. If your client supports retrying stale connections, performing a rolling update to TiDB servers does not impact application, either.
 
-> **Warning:**
->
-> - For the clients that cannot retry stale connections, **performing a rolling update to TiDB servers closes the client connections and cause the request to fail**. In such cases, it is recommended to add a retry function for the clients to retry, or to perform a rolling update to TiDB servers in idle time.
-> - Before upgrading, refer to the [documentation](https://docs.pingcap.com/tidb/stable/sql-statement-admin-show-ddl) to confirm that there are no DDL operations in progress.
+:::danger Warning
+
+- For the clients that cannot retry stale connections, **performing a rolling update to TiDB servers closes the client connections and cause the request to fail**. In such cases, it is recommended to add a retry function for the clients to retry, or to perform a rolling update to TiDB servers in idle time.
+- Before upgrading, refer to the [documentation](https://docs.pingcap.com/tidb/stable/sql-statement-admin-show-ddl) to confirm that there are no DDL operations in progress.
+
+:::
 
 ## Upgrade steps
 
-> **Note:**
->
-> By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+:::note
+
+By default, TiDB (starting from v4.0.2) periodically shares usage details with PingCAP to help understand how to improve the product. For details about what is shared and how to disable the sharing, see [Telemetry](https://docs.pingcap.com/tidb/stable/telemetry).
+
+:::
 
 1. In `TidbCluster` CR, modify the image configurations of all components of the cluster to be upgraded.
 
@@ -49,11 +53,12 @@ During the rolling update, TiDB Operator automatically completes Leader transfer
 
     After all the Pods finish rebuilding and become `Running`, the upgrade is completed.
 
-> **Note:**
->
-> If you want to upgrade to Enterprise Edition, set `spec.<tidb/pd/tikv/tiflash/ticdc/pump>.baseImage` to the enterprise image (`pingcap/<tidb/pd/tikv/tiflash/ticdc/tidb-binlog>-enterprise`).
->
-> For example, change `spec.pd.baseImage` from `pingcap/pd` to `pingcap/pd-enterprise`.
+:::note
+
+If you want to upgrade to Enterprise Edition, set `spec.<tidb/pd/tikv/tiflash/ticdc/pump>.baseImage` to the enterprise image (`pingcap/<tidb/pd/tikv/tiflash/ticdc/tidb-binlog>-enterprise`).
+For example, change `spec.pd.baseImage` from `pingcap/pd` to `pingcap/pd-enterprise`.
+
+:::
 
 ## Troubleshoot the upgrade
 

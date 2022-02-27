@@ -33,11 +33,12 @@ helm uninstall ${cluster_name} -n ${namespace}
 
 The above commands that destroy the cluster only remove the running Pod, but the data is still retained. If you want to delete the data as well, use the following commands:
 
-> **Warning:**
->
-> The following commands delete your data completely. Please be cautious.
->
-> To ensure data safety, do not delete PVs on any circumstances, unless you are familiar with the working principles of PVs.
+:::danger Warning
+
+The following commands delete your data completely. Please be cautious.
+To ensure data safety, do not delete PVs on any circumstances, unless you are familiar with the working principles of PVs.
+
+:::
 
 ```shell
 kubectl delete pvc -n ${namespace} -l app.kubernetes.io/instance=${cluster_name},app.kubernetes.io/managed-by=tidb-operator

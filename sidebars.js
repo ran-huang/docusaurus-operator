@@ -20,16 +20,27 @@ const sidebars = {
 
   mySidebar: [
     {
-        type: 'doc',
-        label: 'Home',
-        id: 'index'
+      type: 'category',
+      label: 'TiDB in Kubernetes',
+      link: {type: 'doc', id: 'index'},
+      items : [
+          {
+              type: 'doc',
+              label: 'TiDB Operator',
+              id: 'tidb-operator-overview',
+          },
+          {
+              type: 'doc',
+              label: 'What\'s New in v1.3',
+              id: 'whats-new-in-v1.3',
+          }
+    ]
     },
     {
-      type: 'category',
-      label: 'About TiDB Operator',
-      items : ['tidb-operator-overview','whats-new-in-v1.2']
+        type: 'doc',
+        label: 'Getting Started',
+        id: 'get-started',
     },
-    'get-started',
     {
         type: 'category',
         label: 'Deploy',
@@ -57,21 +68,54 @@ const sidebars = {
                     'deploy-on-alibaba-cloud'
                 ]
             },
-            'deploy-cluster-on-arm64',
-            'deploy-tiflash',
+            {
+                type: 'doc',
+                label: 'On ARM64',
+                id: 'deploy-cluster-on-arm64',
+            },
+            {
+                type: 'doc',
+                label: 'HTAP',
+                id: 'deploy-tiflash',
+            },
             {
                 type: 'category',
-                label: 'Deploy TiDB Across Multiple Kubernetes Clusters',
+                label: 'Across Multiple Kubernetes Clusters',
                 items: [
-                    'build-multi-aws-eks',
-                    'build-multi-gcp-gke',
+                    {
+                        type: 'doc',
+                        label: 'Amazon EKS',
+                        id: 'build-multi-aws-eks',
+                    },
+                    {
+                        type: 'doc',
+                        label: 'GCP GKE',
+                        id: 'build-multi-gcp-gke',
+                    },
                     'deploy-tidb-cluster-across-multiple-kubernetes'
                 ]
             },
-            'deploy-heterogeneous-tidb-cluster',
-            'deploy-tidb-enterprise-edition',
-            'deploy-ticdc',
-            'deploy-tidb-binlog'
+            {
+                type: 'doc',
+                label: 'Heterogeneous Cluster',
+                id: 'deploy-heterogeneous-tidb-cluster',
+            },
+            {
+                type: 'doc',
+                label: 'Enterprise Edition',
+                id: 'deploy-tidb-enterprise-edition',
+            },
+            {
+                type: 'doc',
+                label: 'TiCDC',
+                id: 'deploy-ticdc',
+            },
+            {
+                type: 'doc',
+                label: 'TiDB Binlog',
+                id: 'deploy-tidb-binlog',
+            },
+
         ]
     },
     {

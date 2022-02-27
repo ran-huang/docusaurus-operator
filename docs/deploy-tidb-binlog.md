@@ -366,10 +366,12 @@ spec:
 
 ### Remove Pump nodes completely
 
-> **Note:**
->
-> - Before performing the following steps, you need to have at least one Pump node in the cluster. If you have scaled in Pump nodes to `0`, you need to scale out Pump at least to `1` node before you perform the removing operation in this section.
-> - To scale out the Pump to `1`, execute `kubectl patch tc ${tidb-cluster} -n ${namespace} --type merge -p '{"spec":{"pump":{"replicas": 1}}}'`.
+:::note
+
+- Before performing the following steps, you need to have at least one Pump node in the cluster. If you have scaled in Pump nodes to `0`, you need to scale out Pump at least to `1` node before you perform the removing operation in this section.
+- To scale out the Pump to `1`, execute `kubectl patch tc ${tidb-cluster} -n ${namespace} --type merge -p '{"spec":{"pump":{"replicas": 1}}}'`.
+
+:::
 
 1. Before removing Pump nodes, execute `kubectl patch tc ${cluster_name} -n ${namespace} --type merge -p '{"spec":{"tidb":{"binlogEnabled": false}}}'`. After the TiDB Pods are rolling updated, you can remove the Pump nodes.
 

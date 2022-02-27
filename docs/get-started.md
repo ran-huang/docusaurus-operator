@@ -7,9 +7,11 @@ summary: Learn how to quickly deploy a TiDB cluster in Kubernetes using TiDB Ope
 
 This document introduces how to create a simple Kubernetes cluster and use it to deploy a basic test TiDB cluster using TiDB Operator.
 
-> **Warning:**
->
-> This document is for demonstration purposes only. **Do not** follow it in production environments. For deployment in production environments, see the instructions in [See also](#see-also).
+:::danger Warning
+
+This document is for demonstration purposes only. **Do not** follow it in production environments. For deployment in production environments, see the instructions in [See also](#see-also).
+
+:::
 
 You can follow these steps to deploy TiDB Operator and a TiDB cluster:
 
@@ -198,9 +200,11 @@ customresourcedefinition.apiextensions.k8s.io/tidbclusterautoscalers.pingcap.com
 
 </details>
 
-> **Note:**
->
-> For Kubernetes earlier than 1.16, only v1beta1 CRD is supported. Therefore, you need to change `crd.yaml` in the preceding command to `crd_v1beta1.yaml`.
+:::note
+
+For Kubernetes earlier than 1.16, only v1beta1 CRD is supported. Therefore, you need to change `crd.yaml` in the preceding command to `crd_v1beta1.yaml`.
+
+:::
 
 ### Install TiDB Operator
 
@@ -385,9 +389,11 @@ If the port `14000` is already occupied, you can replace it with an available po
 
 ### Connect to the TiDB service
 
-> **Note:**
->
-> To connect to TiDB (< v4.0.7) using a MySQL 8.0 client, if the user account has a password, you must explicitly specify `--default-auth=mysql_native_password`. This is because `mysql_native_password` is [no longer the default plugin](https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password).
+:::note
+
+To connect to TiDB (< v4.0.7) using a MySQL 8.0 client, if the user account has a password, you must explicitly specify `--default-auth=mysql_native_password`. This is because `mysql_native_password` is [no longer the default plugin](https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password).
+
+:::
 
 ``` shell
 mysql --comments -h 127.0.0.1 -P 14000 -u root

@@ -20,10 +20,12 @@ If you have the following backup needs, you can use BR to make an [ad-hoc backup
 
 For other backup needs, refer to [Backup and Restore Overview](backup-restore-overview.md) to choose an appropriate backup method.
 
-> **Note:**
->
-> - BR is only applicable to TiDB v3.1 or later releases.
-> - Data that is backed up using BR can only be restored to TiDB instead of other databases.
+:::note
+
+- BR is only applicable to TiDB v3.1 or later releases.
+- Data that is backed up using BR can only be restored to TiDB instead of other databases.
+
+:::
 
 ## Ad-hoc backup
 
@@ -67,8 +69,6 @@ Depending on which method you choose to grant permissions to the remote storage 
 
     The content of `backup-aws-s3.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -109,8 +109,6 @@ Depending on which method you choose to grant permissions to the remote storage 
     ```shell
     kubectl apply -f backup-aws-s3.yaml
     ```
-
-    {{< copyable "" >}}
 
     The content of `backup-aws-s3.yaml` is as follows:
 
@@ -157,8 +155,6 @@ Depending on which method you choose to grant permissions to the remote storage 
     ```
 
     The content of `backup-aws-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -229,8 +225,6 @@ Depending on which method you choose to grant permissions to the remote storage,
 
     The content of `backup-scheduler-aws-s3.yaml` is as follows:
 
-    {{< copyable "" >}}
-
     ```yaml
     ---
     apiVersion: pingcap.com/v1alpha1
@@ -276,8 +270,6 @@ Depending on which method you choose to grant permissions to the remote storage,
     ```
 
     The content of `backup-scheduler-aws-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
@@ -325,8 +317,6 @@ Depending on which method you choose to grant permissions to the remote storage,
     ```
 
     The content of `backup-scheduler-aws-s3.yaml` is as follows:
-
-    {{< copyable "" >}}
 
     ```yaml
     ---
