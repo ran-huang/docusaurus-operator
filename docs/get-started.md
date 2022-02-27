@@ -31,8 +31,11 @@ This section describes two ways to create a simple Kubernetes cluster. After cre
 
 Alternatively, you can deploy a Kubernetes cluster in Google Kubernetes Engine in Google Cloud Platform using the [Google Cloud Shell](https://console.cloud.google.com/cloudshell/open?cloudshell_git_repo=https://github.com/pingcap/docs-tidb-operator&cloudshell_tutorial=en/deploy-tidb-from-kubernetes-gke.md).
 
-<SimpleTab>
-<div label="kind">
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Tabs>
+  <TabItem value="kind" label="kind" default>
 
 ### Create a Kubernetes cluster using kind
 
@@ -94,9 +97,9 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 You are now ready to deploy TiDB Operator.
 
-</div>
+</TabItem>
 
-<div label="minikube">
+<TabItem value="minikube" label="minikube">
 
 ### Create a Kubernetes cluster using minikube
 
@@ -168,8 +171,8 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 
 You are now ready to deploy TiDB Operator.
 
-</div>
-</SimpleTab>
+</TabItem>
+</Tabs>
 
 ## Step 2. Deploy TiDB Operator
 
