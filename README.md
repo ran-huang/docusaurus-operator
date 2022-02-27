@@ -10,12 +10,13 @@ It is a personal project (for study purposes!) and has nothing to do with PingCA
 
 ![Night](/static/img/screenshot-night.jpeg)
 
-## Roadmap
+## TODO
 
 - [x] Migrate the site to Docusaurus
 - [x] Separate the user manuals from reference
 - [ ] Fix admonition
 - [ ] Fix tabs
+- [ ] Add generated index pages
 - [ ] Add i18n support
 - [ ] Add versioning
 - [ ] Enable auto incremental build

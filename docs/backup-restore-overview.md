@@ -9,21 +9,10 @@ This document describes how to perform backup and restore on the TiDB cluster in
 
 TiDB Operator 1.1 and later versions implement the backup and restore methods using Custom Resource Definition (CRD):
 
-+ If your TiDB cluster version is v3.1 or later, refer to the following documents:
+import DocCardList from '@theme/DocCardList';
+import {useCurrentSidebarCategory} from '@docusaurus/theme-common';
 
-    - [Back up Data to S3-Compatible Storage Using BR](backup-to-aws-s3-using-br.md)
-    - [Back up Data to GCS Using BR](backup-to-gcs-using-br.md)
-    - [Back up Data to PV Using BR](backup-to-pv-using-br.md)
-    - [Restore Data from S3-Compatible Storage Using BR](restore-from-aws-s3-using-br.md)
-    - [Restore Data from GCS Using BR](restore-from-gcs-using-br.md)
-    - [Restore Data from PV Using BR](restore-from-pv-using-br.md)
-
-+ If your TiDB cluster version is earlier than v3.1, refer to the following documents:
-
-    - [Back up Data to S3-Compatible Storage Using Dumpling](backup-to-s3.md)
-    - [Back up Data to GCS Using Dumpling](backup-to-gcs.md)
-    - [Restore Data from S3-Compatible Storage Using TiDB Lightning](restore-from-s3.md)
-    - [Restore Data from GCS Using TiDB Lightning](restore-from-gcs.md)
+<DocCardList items={useCurrentSidebarCategory().items}/>
 
 ## User scenarios
 

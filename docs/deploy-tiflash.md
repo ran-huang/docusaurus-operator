@@ -11,6 +11,8 @@ This document describes how to add or remove the TiDB HTAP storage engine TiFlas
 
 If a TiDB cluster has not been deployed yet, instead of referring to this document, you can [configure a TiDB cluster in Kubernetes](configure-a-tidb-cluster.md) with the TiFlash-related parameters, and then [deploy the TiDB cluster](deploy-on-general-kubernetes.md).
 
+:::
+
 ## User scenarios
 
 This document is applicable to scenarios in which you already have a TiDB cluster and need to use TiDB HTAP capabilities by deploying TiFlash, such as the following:
@@ -69,10 +71,12 @@ If your server does not have an external network, you can download the required 
           storageClassName: local-storage
     ```
 
-    > **Note**:
-    >
-    > - When deploying TiFlash for the first time, it is recommended that you plan how many PVs are required and configure the number of `resources` items in `storageClaims` accordingly.
-    > - Once the deployment of TiFlash is completed, if you need to mount additional PVs for TiFlash, updating `storageClaims` directly to add disks does not take effect. This is because TiDB Operator manages TiFlash by creating a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), and the `StatefulSet` does not support modifying `volumeClaimTemplates` after being created.
+    :::note
+
+    - When deploying TiFlash for the first time, it is recommended that you plan how many PVs are required and configure the number of `resources` items in `storageClaims` accordingly.
+    - Once the deployment of TiFlash is completed, if you need to mount additional PVs for TiFlash, updating `storageClaims` directly to add disks does not take effect. This is because TiDB Operator manages TiFlash by creating a [StatefulSet](https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/), and the `StatefulSet` does not support modifying `volumeClaimTemplates` after being created.
+
+    :::
 
 4. Configure the relevant parameters of `spec.tiflash.config` in TidbCluster CR. For example:
 
@@ -93,13 +97,15 @@ If your server does not have an external network, you can download the required 
 
     For more TiFlash parameters that can be configured, refer to [TiFlash Configuration Documentation](https://docs.pingcap.com/tidb/stable/tiflash-configuration).
 
-    > **Note:**
-    >
-    > For different TiFlash versions, note the following configuration differences:
-    >
-    > - If TiFlash version <= v4.0.4, you need to set `spec.tiflash.config.config.flash.service_addr` to `${clusterName}-tiflash-POD_NUM.${clusterName}-tiflash-peer.${namespace}.svc:3930` in TidbCluster CR, where `${clusterName}` and `${namespace}` need to be replaced according to the real case.
-    > - If TiFlash version >= v4.0.5, there is no need to manually configure `spec.tiflash.config.config.flash.service_addr`.
-    > - If you upgrade from TiFlash v4.0.4 or an earlier version to TiFlash v4.0.5 or a later version, you need to delete the configuration of `spec.tiflash.config.config.flash.service_addr` from the `TidbCluster` CR.
+    :::note
+
+    For different TiFlash versions, note the following configuration differences:
+
+    - If TiFlash version <= v4.0.4, you need to set `spec.tiflash.config.config.flash.service_addr` to `${clusterName}-tiflash-POD_NUM.${clusterName}-tiflash-peer.${namespace}.svc:3930` in TidbCluster CR, where `${clusterName}` and `${namespace}` need to be replaced according to the real case.
+    - If TiFlash version >= v4.0.5, there is no need to manually configure `spec.tiflash.config.config.flash.service_addr`.
+    - If you upgrade from TiFlash v4.0.4 or an earlier version to TiFlash v4.0.5 or a later version, you need to delete the configuration of `spec.tiflash.config.config.flash.service_addr` from the `TidbCluster` CR.
+
+    :::
 
 ## Adding PVs to TiFlash
 

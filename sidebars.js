@@ -44,6 +44,12 @@ const sidebars = {
     {
         type: 'category',
         label: 'Deploy',
+        link: {
+            type: 'generated-index',
+            title: 'Deploy',
+            description: "Deploy TiDB Operator and TiDB clusters in your production environment:",
+            keywords: ['deploy'],
+        },
         items: [
             {
                 type: 'category',
@@ -141,6 +147,11 @@ const sidebars = {
     {
         type: 'category',
         label: 'Manage',
+        link: {
+            type: 'generated-index',
+            title: 'Manage TiDB clusters in Kubernetes',
+            description: "Learn how to manage your TiDB clusters in Kubernetes:",
+        },
         items: [
             {
                 type: 'category',
@@ -174,7 +185,14 @@ const sidebars = {
                 items: [
                     'grant-permissions-to-remote-storage',
                     {
-                        'Amazon S3 Compatible Storage': [
+                        type: 'category',
+                        label: 'Amazon S3 Compatible Storage',
+                        link: {
+                            type: 'generated-index',
+                            title: 'Amazon S3 Compatible Storage',
+                            description: "Learn how to back up and restore data with Amazon S3 compatible storage:",
+                        },
+                        items: [
                             'backup-to-aws-s3-using-br',
                             'restore-from-aws-s3-using-br',
                             'backup-to-s3',
@@ -182,7 +200,14 @@ const sidebars = {
                         ]
                     },
                     {
-                        'Google Cloud Storage': [
+                        type: 'category',
+                        label: 'Google Cloud Storage',
+                        link: {
+                            type: 'generated-index',
+                            title: 'Google Cloud Storage',
+                            description: "Learn how to back up and restore data with Google Cloud Storage:",
+                        },
+                        items: [
                             'backup-to-gcs-using-br',
                             'restore-from-gcs-using-br',
                             'backup-to-gcs',
@@ -232,8 +257,11 @@ const sidebars = {
             'network-issues'
         ]
     },
-    'faq',
-
+    {
+        type: 'doc',
+        label: 'FAQ',
+        id:'faq',
+    },
   ],
 
   refSidebar: [
