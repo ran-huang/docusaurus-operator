@@ -9,7 +9,7 @@ const config = {
   title: 'TiDB in Kubernetes Docs',
   tagline: 'SQL at Scale',
   url: 'https://ran-huang.github.io',
-  baseUrl: '/',
+  baseUrl: '/docusaurus-operator/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
