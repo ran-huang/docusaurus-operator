@@ -44,7 +44,7 @@ const config = {
         title: 'TiDB in Kubernetes',
         logo: {
           alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          src: 'img/tidb-logo.svg',
         },
         items: [
           {
